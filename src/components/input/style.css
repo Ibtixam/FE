@@ -1,0 +1,58 @@
+.did-floating-label-content {
+  position: relative;
+}
+
+.did-floating-label {
+  color: #858585;
+  font-size: 13px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 15px;
+  top: 15px;
+  padding: 0 5px;
+  background: #fff;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.did-floating-input,
+.did-floating-select {
+  font-size: 14px;
+  width: 280px;
+  padding: 12px 20px;
+  background: #fff;
+  color: #323840;
+  border: 2px solid #d8d8d8;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.did-floating-input:focus,
+.did-floating-select:focus {
+  outline: none;
+  border: 2px solid #176b87;
+}
+
+.did-floating-input:focus ~ .did-floating-label,
+.did-floating-select:focus ~ .did-floating-label {
+  top: -8px;
+  font-size: 13px;
+  color: #176b87;
+}
+
+select.did-floating-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select.did-floating-select::-ms-expand {
+  display: none;
+}
+
+.did-floating-input:not(:placeholder-shown) ~ .did-floating-label {
+  top: -8px;
+  font-size: 13px;
+}
