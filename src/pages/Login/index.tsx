@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import {
   Wrapper,
   LoginContainer,
@@ -11,6 +11,7 @@ import Input from "../../components/input";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constant";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,14 +28,23 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await axios.post(`${BASE_URL}/login`, formData);
-      console.log(res);
-      navigate("/dashboard");
+      Swal.fire({
+        text: res.data.message,
+        icon: "success",
+        timer: 2000,
+      });
+      setTimeout(() => navigate("/dashboard"), 1000);
     } catch (error) {
-      console.error("Error:", error);
+      console.error(error)
+      Swal.fire({
+        text: "Invalid Email or Password",
+        icon: "error",
+        timer: 2000,
+      });
     }
   };
 
@@ -47,12 +57,14 @@ const Login = () => {
         <FormContainer onSubmit={handleSubmit}>
           <Input
             name="email"
+            type="email"
             value={formData.email}
             placeholder="Email"
             onChange={handleFormData}
           />
           <Input
             name="password"
+            type="text"
             value={formData.password}
             placeholder="Password"
             onChange={handleFormData}

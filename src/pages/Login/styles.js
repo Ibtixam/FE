@@ -29,6 +29,9 @@ export const LoginButton = styled.button`
   background: #176b87;
   color: #fff;
   font-size: 15px;
+  &:active{
+    transform: scale(0.99);
+  }
 `;
 
 export const TitleContainer = styled.div`
