@@ -11,7 +11,7 @@ import Input from "../../components/input";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constant";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { swalAlert } from "../../utils/helpers";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -32,19 +32,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(`${BASE_URL}/login`, formData);
-      Swal.fire({
-        text: res.data.message,
-        icon: "success",
-        timer: 2000,
-      });
+      localStorage.setItem("token", res.data.authToken);
+      swalAlert("Login Successfully");
       setTimeout(() => navigate("/dashboard"), 1000);
     } catch (error) {
-      console.error(error)
-      Swal.fire({
-        text: "Invalid Email or Password",
-        icon: "error",
-        timer: 2000,
-      });
+      console.error(error);
+      swalAlert("Invalid Email or Password", "error");
     }
   };
 
@@ -64,7 +57,7 @@ const Login = () => {
           />
           <Input
             name="password"
-            type="text"
+            type="password"
             value={formData.password}
             placeholder="Password"
             onChange={handleFormData}
