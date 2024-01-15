@@ -12,9 +12,11 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/constant";
 import { useNavigate } from "react-router-dom";
 import { swalAlert } from "../../utils/helpers";
+import { useApp } from "../../contexts";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setauthToken } = useApp() || {};
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,9 +33,10 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${BASE_URL}/login`, formData);
+      const res = await axios.post(`${BASE_URL}/api/auth/login`, formData);
       localStorage.setItem("token", res.data.authToken);
       swalAlert("Login Successfully");
+      setauthToken?.(res.data.authToken);
       setTimeout(() => navigate("/dashboard"), 1000);
     } catch (error) {
       console.error(error);
