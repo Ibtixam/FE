@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-export const ProductContainer = styled.div`
-  width: 85%;
-  min-height: 80vh;
-  background: #fff;
-  margin: 40px auto;
-  border-radius: 6px;
-`;
-
 export const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
