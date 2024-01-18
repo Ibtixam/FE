@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Header from "../../components/header";
-import Table from "../../components/table";
+import { Header, Table, Modal } from "../../components";
 import {
   ProductContainer,
   InfoWrapper,
@@ -11,6 +10,7 @@ import {
 const Dashboard = () => {
   const [products, setProducts] = useState<any>([]);
   const [search, setSearch] = useState<string>("");
+  const [visible, setVisible] = useState<boolean>(false);
 
   const ItemList = products?.filter((a: any) =>
     a?.Cash_payment_voucher.toLowerCase().includes(search.toLowerCase())
@@ -24,10 +24,16 @@ const Dashboard = () => {
             placeholder={"Search Products"}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <AddProduct>Add Product</AddProduct>
+          <AddProduct onClick={() => setVisible(true)}>Add Product</AddProduct>
         </InfoWrapper>
         <Table ItemList={ItemList} setProducts={setProducts} />
       </ProductContainer>
+      <Modal
+        visible={visible}
+        setVisible={setVisible}
+        onCancel={() => setVisible(false)}
+        onConfirm={() => console.log("Confirm Clicked")}
+      />
     </>
   );
 };
