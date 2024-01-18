@@ -1,16 +1,33 @@
+import { useState } from "react";
 import Header from "../../components/header";
 import Table from "../../components/table";
-// import { InfoWrapper, Title, AddButton } from "./styles";
+import {
+  ProductContainer,
+  InfoWrapper,
+  SearchInput,
+  AddProduct,
+} from "./styles";
 
 const Dashboard = () => {
+  const [products, setProducts] = useState<any>([]);
+  const [search, setSearch] = useState<string>("");
+
+  const ItemList = products?.filter((a: any) =>
+    a?.Cash_payment_voucher.toLowerCase().includes(search.toLowerCase())
+  );
   return (
     <>
       <Header />
-      {/* <InfoWrapper>
-        <Title>Products</Title>
-        <AddButton>Add Product</AddButton>
-      </InfoWrapper> */}
-      <Table />
+      <ProductContainer>
+        <InfoWrapper>
+          <SearchInput
+            placeholder={"Search Products"}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <AddProduct>Add Product</AddProduct>
+        </InfoWrapper>
+        <Table ItemList={ItemList} setProducts={setProducts} />
+      </ProductContainer>
     </>
   );
 };

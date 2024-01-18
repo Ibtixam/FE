@@ -3,11 +3,10 @@ import styled from "styled-components";
 export const TableWrapper = styled.table`
   display: table;
   background-color: #fff;
-  width: 85%;
-  margin: 40px auto;
+  width: 100%;
   color: rgba(0, 0, 0, 0.87);
   border-collapse: collapse;
-  border-radius: 8px;
+  border-radius: 0 0 8px 8px;
 `;
 
 export const TableRow = styled.tr`
