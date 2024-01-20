@@ -8,7 +8,7 @@ export const ModalContainer = styled.div`
   align-items: center;
   border-radius: 6px;
   z-index: 10;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -19,9 +19,9 @@ export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
   min-height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
-  opacity: 0.8;
+  opacity: 0.9;
 `;
 
 export const Title = styled.h2`
@@ -45,6 +45,9 @@ export const Input = styled.input`
   border-radius: 3px;
   border: 1px solid #dadada;
   padding: 5px 10px;
+  &:focus {
+    border: 1px solid #176b87;
+  }
 `;
 
 export const Label = styled.label`

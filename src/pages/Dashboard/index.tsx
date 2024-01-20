@@ -8,13 +8,14 @@ import {
 } from "./styles";
 
 const Dashboard = () => {
-  const [products, setProducts] = useState<any>([]);
+  const [products, setProducts] = useState<any | undefined>([]);
   const [search, setSearch] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(false);
 
   const ItemList = products?.filter((a: any) =>
     a?.Cash_payment_voucher.toLowerCase().includes(search.toLowerCase())
   );
+
   return (
     <>
       <Header />
@@ -30,9 +31,8 @@ const Dashboard = () => {
       </ProductContainer>
       <Modal
         visible={visible}
-        setVisible={setVisible}
+        setProducts={setProducts}
         onCancel={() => setVisible(false)}
-        onConfirm={() => console.log("Confirm Clicked")}
       />
     </>
   );

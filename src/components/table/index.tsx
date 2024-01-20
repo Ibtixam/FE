@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { TableWrapper, TableRow, TableHead, TableData } from "./style";
 import { BASE_URL } from "../../utils/constant";
 import axios from "axios";
+import { useApp } from "../../contexts";
 
 interface TableProps {
   ItemList: any;
@@ -15,9 +16,15 @@ interface ItemType {
 }
 
 const Table: React.FC<TableProps> = ({ ItemList, setProducts }) => {
+  const { storedToken } = useApp() || {};
   const getProducts = async () => {
     try {
-      const res = await axios.get(`${BASE_URL}/api/get/products`);
+      const res = await axios.get(`${BASE_URL}/api/get/products`, {
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": storedToken,
+        },
+      });
       setProducts(res?.data);
     } catch (error) {
       console.error(error);
