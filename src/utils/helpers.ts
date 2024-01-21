@@ -7,3 +7,12 @@ export const swalAlert = (text: string, type: any = "success") => {
     timer: 2000,
   });
 };
+
+export const header = () => {
+  const token = localStorage.getItem("token");
+  const option = {
+    "Content-Type": "application/json",
+    "auth-token": token,
+  };
+  return option;
+};

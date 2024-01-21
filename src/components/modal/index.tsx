@@ -12,10 +12,8 @@ import {
 } from "./styles";
 import ReactDOM from "react-dom";
 import React from "react";
-import axios from "axios";
-import { BASE_URL } from "../../utils/constant";
 import { swalAlert } from "../../utils/helpers";
-import { useApp } from "../../contexts";
+import { SharedApi } from "../../libs/api/sharedapi";
 
 interface ModalProps {
   visible?: boolean;
@@ -37,7 +35,6 @@ const Modal: React.FC<ModalProps> = ({
   onConfirm,
   setProducts,
 }) => {
-  const { storedToken } = useApp() || {};
   const [modalInputData, setModalInputData] = useState<ModalInputProps>({
     Cash_payment_voucher: "",
     GTN_Number: "",
@@ -50,27 +47,18 @@ const Modal: React.FC<ModalProps> = ({
   };
 
   const handleSave = async () => {
-    const API_URL = `${BASE_URL}/api/add/products`;
-    try {
-      const response = await axios.post(API_URL, modalInputData, {
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": storedToken,
-        },
-      });
-      if (setProducts) {
-        setProducts((prev: any) => [...prev, { ...modalInputData }]);
-      }
-      setModalInputData({
-        Cash_payment_voucher: "",
-        Salary_payment_voucher: "",
-        GTN_Number: "",
-      });
-      swalAlert("Product Successfully Added");
-      onCancel?.();
-    } catch (error) {
-      console.error(error);
+    const res = await SharedApi?.addItem(modalInputData);
+    if (setProducts) {
+      setProducts((prev: any) => [...prev, { ...modalInputData }]);
     }
+    setModalInputData({
+      Cash_payment_voucher: "",
+      Salary_payment_voucher: "",
+      GTN_Number: "",
+    });
+    swalAlert("Product Successfully Added");
+    onCancel?.();
+    return res;
   };
   return (
     <>

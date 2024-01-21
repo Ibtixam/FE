@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { TableWrapper, TableRow, TableHead, TableData } from "./style";
-import { BASE_URL } from "../../utils/constant";
-import axios from "axios";
-import { useApp } from "../../contexts";
+import { SharedApi } from "../../libs/api/sharedapi";
 
 interface TableProps {
   ItemList: any;
@@ -16,19 +14,9 @@ interface ItemType {
 }
 
 const Table: React.FC<TableProps> = ({ ItemList, setProducts }) => {
-  const { storedToken } = useApp() || {};
   const getProducts = async () => {
-    try {
-      const res = await axios.get(`${BASE_URL}/api/get/products`, {
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": storedToken,
-        },
-      });
-      setProducts(res?.data);
-    } catch (error) {
-      console.error(error);
-    }
+    const res = await SharedApi?.getItemList();
+    setProducts(res);
   };
 
   useEffect(() => {
@@ -38,12 +26,14 @@ const Table: React.FC<TableProps> = ({ ItemList, setProducts }) => {
 
   return (
     <TableWrapper>
-      <TableRow>
-        <TableHead>No.</TableHead>
-        <TableHead>Cash Payment Voucher</TableHead>
-        <TableHead>Salary Payment Voucher</TableHead>
-        <TableHead>GTN Number</TableHead>
-      </TableRow>
+      <thead style={{ borderBottom: "1px solid rgba(224, 224, 224, 1)" }}>
+        <TableRow>
+          <TableHead>No.</TableHead>
+          <TableHead>Cash Payment Voucher</TableHead>
+          <TableHead>Salary Payment Voucher</TableHead>
+          <TableHead>GTN Number</TableHead>
+        </TableRow>
+      </thead>
       <tbody>
         {ItemList?.map((item: ItemType, index: number) => {
           const { Cash_payment_voucher, GTN_Number, Salary_payment_voucher } =

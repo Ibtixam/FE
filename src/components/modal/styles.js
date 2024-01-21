@@ -1,4 +1,12 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const opacityAnimation = keyframes`    
+0% {
+  opacity: 0;
+}
+100% {
+  opacity: 1;
+}`;
 
 export const ModalContainer = styled.div`
   background-color: #fff;
@@ -13,6 +21,8 @@ export const ModalContainer = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   color: #444;
+  /* opacity: ${({ $visible }) => ($visible ? 1 : 0)}; */
+  animation: ${opacityAnimation} 0.3s ease-out;
 `;
 
 export const Overlay = styled.div`
@@ -21,7 +31,6 @@ export const Overlay = styled.div`
   min-height: 100vh;
   position: fixed;
   top: 0;
-  opacity: 0.9;
 `;
 
 export const Title = styled.h2`
