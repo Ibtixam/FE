@@ -23,6 +23,10 @@ export const ModalContainer = styled.div`
   color: #444;
   /* opacity: ${({$visible}) => ($visible ? 1 : 0)}; */
   animation: ${opacityAnimation} 0.3s ease-out;
+  .select-voucher {
+    width: 189px;
+    font-size: 13px;
+  }
 `;
 
 export const Overlay = styled.div`

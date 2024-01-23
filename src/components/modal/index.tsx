@@ -10,10 +10,12 @@ import {
   CancelButton,
   SaveButton,
 } from './styles';
+import Select, {GroupBase} from 'react-select';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import {swalAlert} from '../../utils/helpers';
 import {SharedApi} from '../../libs/api/sharedapi';
+import {VoucherTypeContants} from '../../utils/constant';
 
 interface ModalProps {
   visible?: boolean;
@@ -27,7 +29,7 @@ interface ModalInputProps {
   Voucher_Type: string;
   Voucher_Number: string;
   Amount: string;
-  Date: Date;
+  // Date: Date;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -40,11 +42,12 @@ const Modal: React.FC<ModalProps> = ({
     Voucher_Type: '',
     Voucher_Number: '',
     Amount: '',
-    Date: new Date(),
   });
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {value, name} = e.target;
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
+    if (!e) return;
+    const target = e.label ? e : e.target;
+    const {value, name} = target;
     setModalInputData((prev: any) => ({...prev, [name]: value}));
   };
 
@@ -57,12 +60,13 @@ const Modal: React.FC<ModalProps> = ({
       Voucher_Type: '',
       Voucher_Number: '',
       Amount: '',
-      Date: new Date(),
+      // Date: new Date(),
     });
-    swalAlert('Product Successfully Added');
+    swalAlert('Product Added Successfully');
     onCancel?.();
     return res;
   };
+
   return (
     <>
       {visible && (
@@ -72,10 +76,12 @@ const Modal: React.FC<ModalProps> = ({
             <Title>Add Product</Title>
             <InputWrapper>
               <Label>Voucher Type: </Label>
-              <Input
-                name="Voucher_Type"
-                value={modalInputData.Voucher_Type}
+              <Select
+                defaultValue={modalInputData.Voucher_Type}
                 onChange={handleOnChange}
+                isSearchable={false}
+                options={VoucherTypeContants as unknown as GroupBase<string>[]}
+                className="select-voucher"
               />
             </InputWrapper>
             <InputWrapper>
@@ -93,16 +99,6 @@ const Modal: React.FC<ModalProps> = ({
                 value={modalInputData.Amount}
                 onChange={handleOnChange}
               />
-              {/* <Input
-                name="Date"
-                type="date"
-                value={
-                  modalInputData.Date instanceof Date
-                    ? modalInputData.Date.toISOString().split("T")[0]
-                    : ""
-                }
-                onChange={handleOnChange}
-              /> */}
             </InputWrapper>
             <ButtonWrapper>
               <CancelButton onClick={onCancel}>Cancel</CancelButton>
