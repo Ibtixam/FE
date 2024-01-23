@@ -1,5 +1,5 @@
-import React, { ChangeEvent } from "react";
-import "./style.css";
+import React, {ChangeEvent} from 'react';
+import './style.css';
 
 interface InputProps {
   placeholder: string;
@@ -10,7 +10,7 @@ interface InputProps {
 }
 
 const Input: React.FC<InputProps> = (props) => {
-  const { placeholder } = props;
+  const {placeholder} = props;
   return (
     <div className="did-floating-label-content">
       <input

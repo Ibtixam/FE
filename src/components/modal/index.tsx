@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from 'react';
 import {
   ModalContainer,
   Title,
@@ -9,11 +9,11 @@ import {
   ButtonWrapper,
   CancelButton,
   SaveButton,
-} from "./styles";
-import ReactDOM from "react-dom";
-import React from "react";
-import { swalAlert } from "../../utils/helpers";
-import { SharedApi } from "../../libs/api/sharedapi";
+} from './styles';
+import ReactDOM from 'react-dom';
+import React from 'react';
+import {swalAlert} from '../../utils/helpers';
+import {SharedApi} from '../../libs/api/sharedapi';
 
 interface ModalProps {
   visible?: boolean;
@@ -24,9 +24,10 @@ interface ModalProps {
 }
 
 interface ModalInputProps {
-  Cash_payment_voucher: string;
-  GTN_Number: string;
-  Salary_payment_voucher: string;
+  Voucher_Type: string;
+  Voucher_Number: string;
+  Amount: string;
+  Date: Date;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -36,27 +37,29 @@ const Modal: React.FC<ModalProps> = ({
   setProducts,
 }) => {
   const [modalInputData, setModalInputData] = useState<ModalInputProps>({
-    Cash_payment_voucher: "",
-    GTN_Number: "",
-    Salary_payment_voucher: "",
+    Voucher_Type: '',
+    Voucher_Number: '',
+    Amount: '',
+    Date: new Date(),
   });
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setModalInputData((prev: any) => ({ ...prev, [name]: value }));
+    const {value, name} = e.target;
+    setModalInputData((prev: any) => ({...prev, [name]: value}));
   };
 
   const handleSave = async () => {
     const res = await SharedApi?.addItem(modalInputData);
     if (setProducts) {
-      setProducts((prev: any) => [...prev, { ...modalInputData }]);
+      setProducts((prev: any) => [...prev, {...modalInputData}]);
     }
     setModalInputData({
-      Cash_payment_voucher: "",
-      Salary_payment_voucher: "",
-      GTN_Number: "",
+      Voucher_Type: '',
+      Voucher_Number: '',
+      Amount: '',
+      Date: new Date(),
     });
-    swalAlert("Product Successfully Added");
+    swalAlert('Product Successfully Added');
     onCancel?.();
     return res;
   };
@@ -68,28 +71,38 @@ const Modal: React.FC<ModalProps> = ({
           <ModalContainer>
             <Title>Add Product</Title>
             <InputWrapper>
-              <Label>Cash Payment Voucher: </Label>
+              <Label>Voucher Type: </Label>
               <Input
-                name="Cash_payment_voucher"
-                value={modalInputData.Cash_payment_voucher}
+                name="Voucher_Type"
+                value={modalInputData.Voucher_Type}
                 onChange={handleOnChange}
               />
             </InputWrapper>
             <InputWrapper>
-              <Label>Salary Payment Voucher: </Label>
+              <Label>Voucher Number: </Label>
               <Input
-                name="Salary_payment_voucher"
-                value={modalInputData.Salary_payment_voucher}
+                name="Voucher_Number"
+                value={modalInputData.Voucher_Number}
                 onChange={handleOnChange}
               />
             </InputWrapper>
             <InputWrapper>
-              <Label>GTN Number: </Label>
+              <Label>Amount: </Label>
               <Input
-                name="GTN_Number"
-                value={modalInputData.GTN_Number}
+                name="Amount"
+                value={modalInputData.Amount}
                 onChange={handleOnChange}
               />
+              {/* <Input
+                name="Date"
+                type="date"
+                value={
+                  modalInputData.Date instanceof Date
+                    ? modalInputData.Date.toISOString().split("T")[0]
+                    : ""
+                }
+                onChange={handleOnChange}
+              /> */}
             </InputWrapper>
             <ButtonWrapper>
               <CancelButton onClick={onCancel}>Cancel</CancelButton>
@@ -103,7 +116,7 @@ const Modal: React.FC<ModalProps> = ({
 };
 
 const createModal: React.FC<ModalProps> = (props) => {
-  const createModal: any = document.getElementById("modal");
+  const createModal: any = document.getElementById('modal');
   return ReactDOM.createPortal(<Modal {...props} />, createModal);
 };
 

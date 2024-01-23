@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 interface Props {
   theme?: String;
 }
 
-const PageNotFound: React.FC<Props> = ({ theme }) => {
+const PageNotFound: React.FC<Props> = ({theme}) => {
   const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
@@ -13,7 +13,7 @@ const PageNotFound: React.FC<Props> = ({ theme }) => {
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    color: ${theme === "light" ? "black" : "white"};
+    color: ${theme === 'light' ? 'black' : 'white'};
   `;
 
   const Container = styled.div`
@@ -36,7 +36,7 @@ const PageNotFound: React.FC<Props> = ({ theme }) => {
     height: 45px;
     width: 1px;
     border: none;
-    background-color: ${theme === "light" ? "black" : "white"};
+    background-color: ${theme === 'light' ? 'black' : 'white'};
   `;
 
   return (

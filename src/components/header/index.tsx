@@ -1,12 +1,12 @@
-import { HeaderContainer, HeaderTitle, SvgWrapper } from "./styles";
-import { LogoutSvg } from "../../assets/svgs";
-import { useApp } from "../../contexts";
+import {HeaderContainer, HeaderTitle, SvgWrapper} from './styles';
+import {LogoutSvg} from '../../assets/svgs';
+import {useApp} from '../../contexts';
 
 const Header = () => {
-  const { setauthToken } = useApp() || {};
+  const {setauthToken} = useApp() || {};
   const logout = () => {
-    localStorage.removeItem("token");
-    setauthToken?.("");
+    localStorage.removeItem('token');
+    setauthToken?.('');
   };
   return (
     <HeaderContainer>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import {createContext, useContext, useState} from 'react';
 
 interface AppContextTypes {
   authToken: string | null;
@@ -8,10 +8,10 @@ interface AppContextTypes {
 
 export const AppContext = createContext<AppContextTypes | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
+export const AppProvider: React.FC<{children: React.ReactNode}> = ({
   children,
 }) => {
-  const storedToken = localStorage.getItem("token");
+  const storedToken = localStorage.getItem('token');
   const [authToken, setauthToken] = useState(storedToken);
   const contextValue: AppContextTypes = {
     authToken,

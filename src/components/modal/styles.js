@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, {keyframes} from 'styled-components';
 
 const opacityAnimation = keyframes`    
 0% {
@@ -21,7 +21,7 @@ export const ModalContainer = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   color: #444;
-  /* opacity: ${({ $visible }) => ($visible ? 1 : 0)}; */
+  /* opacity: ${({$visible}) => ($visible ? 1 : 0)}; */
   animation: ${opacityAnimation} 0.3s ease-out;
 `;
 

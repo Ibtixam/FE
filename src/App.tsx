@@ -1,9 +1,9 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import PageNotFound from "./components/pageNotFound";
-import ProtectedRoutes from "./utils/ProtectedRoutes";
+import React from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import PageNotFound from './components/pageNotFound';
+import ProtectedRoutes from './utils/ProtectedRoutes';
 
 const App = () => {
   return (

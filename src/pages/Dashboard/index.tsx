@@ -1,19 +1,14 @@
-import { useState } from "react";
-import { Header, Table, Modal } from "../../components";
-import {
-  ProductContainer,
-  InfoWrapper,
-  SearchInput,
-  AddProduct,
-} from "./styles";
+import {useState} from 'react';
+import {Header, Table, Modal} from '../../components';
+import {ProductContainer, InfoWrapper, SearchInput, AddProduct} from './styles';
 
 const Dashboard = () => {
   const [products, setProducts] = useState<any | undefined>([]);
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
 
   const ItemList = products?.filter((a: any) =>
-    a?.Cash_payment_voucher.toLowerCase().includes(search.toLowerCase())
+    a?.Voucher_Number?.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
@@ -22,7 +17,7 @@ const Dashboard = () => {
       <ProductContainer>
         <InfoWrapper>
           <SearchInput
-            placeholder={"Search Products"}
+            placeholder={'Search Products'}
             onChange={(e) => setSearch(e.target.value)}
           />
           <AddProduct onClick={() => setVisible(true)}>Add Product</AddProduct>

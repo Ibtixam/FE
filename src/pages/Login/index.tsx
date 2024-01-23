@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import {useState, ChangeEvent, FormEvent} from 'react';
 import {
   Wrapper,
   LoginContainer,
@@ -6,23 +6,23 @@ import {
   TitleContainer,
   FormContainer,
   Title,
-} from "./styles.js";
-import Input from "../../components/input";
-import { useNavigate } from "react-router-dom";
-import { swalAlert } from "../../utils/helpers";
-import { useApp } from "../../contexts";
-import { SharedApi } from "../../libs/api/sharedapi";
+} from './styles.js';
+import Input from '../../components/input';
+import {useNavigate} from 'react-router-dom';
+import {swalAlert} from '../../utils/helpers';
+import {useApp} from '../../contexts';
+import {SharedApi} from '../../libs/api/sharedapi';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setauthToken } = useApp() || {};
+  const {setauthToken} = useApp() || {};
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
-  const handleFormData = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = target;
+  const handleFormData = ({target}: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -33,13 +33,13 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await SharedApi?.login(formData);
-      localStorage.setItem("token", res.authToken);
-      swalAlert("Login Successfully");
+      localStorage.setItem('token', res.authToken);
+      swalAlert('Login Successfully');
       setauthToken?.(res.authToken);
-      setTimeout(() => navigate("/dashboard"), 1000);
+      setTimeout(() => navigate('/dashboard'), 1000);
     } catch (error) {
       console.error(error);
-      swalAlert("Invalid Email or Password", "error");
+      swalAlert('Invalid Email or Password', 'error');
     }
   };
 

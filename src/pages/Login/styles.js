@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ export const LoginButton = styled.button`
   background: #176b87;
   color: #fff;
   font-size: 15px;
-  &:active{
+  &:active {
     transform: scale(0.99);
   }
 `;

@@ -1,1 +1,1 @@
-export { ReactComponent as LogoutSvg } from "./logout.svg";
+export {ReactComponent as LogoutSvg} from './logout.svg';
