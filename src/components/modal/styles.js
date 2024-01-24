@@ -24,8 +24,9 @@ export const ModalContainer = styled.div`
   /* opacity: ${({$visible}) => ($visible ? 1 : 0)}; */
   animation: ${opacityAnimation} 0.3s ease-out;
   .select-voucher {
-    width: 189px;
+    width: 190px;
     font-size: 13px;
+    padding: 2px;
   }
 `;
 
@@ -55,12 +56,35 @@ export const InputWrapper = styled.div`
 
 export const Input = styled.input`
   outline: none;
+  width: 190px;
   border-radius: 3px;
   border: 1px solid #dadada;
-  padding: 5px 10px;
+  padding: 8px 10px;
   &:focus {
     border: 1px solid #176b87;
   }
+`;
+
+export const SvgWrapper = styled.div`
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  position: absolute;
+  right: 24px;
+  &:hover {
+    background-color: rgba(139, 139, 139, 0.4);
+  }
+`;
+
+export const DateInputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Label = styled.label`

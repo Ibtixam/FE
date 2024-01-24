@@ -29,7 +29,7 @@ interface ModalInputProps {
   Voucher_Type: string;
   Voucher_Number: string;
   Amount: string;
-  // Date: Date;
+  Date: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -42,6 +42,7 @@ const Modal: React.FC<ModalProps> = ({
     Voucher_Type: '',
     Voucher_Number: '',
     Amount: '',
+    Date: '',
   });
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
@@ -60,7 +61,7 @@ const Modal: React.FC<ModalProps> = ({
       Voucher_Type: '',
       Voucher_Number: '',
       Amount: '',
-      // Date: new Date(),
+      Date: '',
     });
     swalAlert('Product Added Successfully');
     onCancel?.();
@@ -73,7 +74,7 @@ const Modal: React.FC<ModalProps> = ({
         <>
           <Overlay onClick={onCancel} />
           <ModalContainer>
-            <Title>Add Product</Title>
+            <Title>Add Voucher</Title>
             <InputWrapper>
               <Label>Voucher Type: </Label>
               <Select
@@ -97,6 +98,15 @@ const Modal: React.FC<ModalProps> = ({
               <Input
                 name="Amount"
                 value={modalInputData.Amount}
+                onChange={handleOnChange}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Label>Date: </Label>
+              <Input
+                name="Date"
+                type="Date"
+                value={modalInputData.Date}
                 onChange={handleOnChange}
               />
             </InputWrapper>
