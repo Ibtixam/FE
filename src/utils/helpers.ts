@@ -16,3 +16,11 @@ export const header = () => {
   };
   return option;
 };
+
+export const currencyFormat = (price: number) => {
+  const currencyUGX = new Intl.NumberFormat('en-UG', {
+    style: 'currency',
+    currency: 'UGX',
+  });
+  return currencyUGX.format(price);
+};

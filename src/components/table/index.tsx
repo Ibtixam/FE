@@ -1,6 +1,7 @@
 import {useEffect} from 'react';
 import {TableWrapper, TableRow, TableHead, TableData} from './style';
 import {SharedApi} from '../../libs/api/sharedapi';
+import {currencyFormat} from '../../utils/helpers';
 
 interface TableProps {
   ItemList: any;
@@ -10,7 +11,7 @@ interface TableProps {
 interface ItemType {
   Voucher_Type: string;
   Voucher_Number: string;
-  Amount: string;
+  Amount: number;
   Date: string;
 }
 
@@ -44,7 +45,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
               <TableData>{index + 1}</TableData>
               <TableData>{Voucher_Type}</TableData>
               <TableData>{Voucher_Number}</TableData>
-              <TableData>{Amount}</TableData>
+              <TableData>{currencyFormat(Amount)}</TableData>
               <TableData>{Date}</TableData>
             </TableRow>
           );
