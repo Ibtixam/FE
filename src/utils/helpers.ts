@@ -8,10 +8,10 @@ export const swalAlert = (text: string, type: any = 'success') => {
   });
 };
 
-export const header = () => {
+export const header = (formdata?: object) => {
   const token = localStorage.getItem('token');
   const option = {
-    'Content-Type': 'application/json',
+    'Content-Type': formdata ? 'multipart/form-data' : 'application/json',
     'auth-token': token,
   };
   return option;

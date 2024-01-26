@@ -28,6 +28,15 @@ export const ModalContainer = styled.div`
     font-size: 13px;
     padding: 2px;
   }
+  .voucher-image {
+    border: 2px solid #a9a9a9;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    align-self: center;
+    cursor: pointer;
+    overflow: hidden;
+  }
 `;
 
 export const Overlay = styled.div`

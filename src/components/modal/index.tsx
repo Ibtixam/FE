@@ -16,6 +16,7 @@ import React from 'react';
 import {swalAlert} from '../../utils/helpers';
 import {SharedApi} from '../../libs/api/sharedapi';
 import {VoucherTypeContants} from '../../utils/constant';
+import {UploadImage} from '../../assets/svgs';
 
 interface ModalProps {
   visible?: boolean;
@@ -30,6 +31,7 @@ interface ModalInputProps {
   Voucher_Number: string;
   Amount: string;
   Date: string;
+  Voucher_Image: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -43,6 +45,7 @@ const Modal: React.FC<ModalProps> = ({
     Voucher_Number: '',
     Amount: '',
     Date: '',
+    Voucher_Image: '',
   });
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
@@ -54,6 +57,8 @@ const Modal: React.FC<ModalProps> = ({
 
   const handleSave = async () => {
     const res = await SharedApi?.addItem(modalInputData);
+    console.log(res)
+    console.log(modalInputData)
     if (setProducts) {
       setProducts((prev: any) => [...prev, {...modalInputData}]);
     }
@@ -62,6 +67,7 @@ const Modal: React.FC<ModalProps> = ({
       Voucher_Number: '',
       Amount: '',
       Date: '',
+      Voucher_Image: '',
     });
     swalAlert('Product Added Successfully');
     onCancel?.();
@@ -75,6 +81,23 @@ const Modal: React.FC<ModalProps> = ({
           <Overlay onClick={onCancel} />
           <ModalContainer>
             <Title>Add Voucher</Title>
+            <InputWrapper style={{justifyContent: 'center'}}>
+              <Label htmlFor="Voucher_Image" className="voucher-image">
+                <img
+                  src={UploadImage}
+                  alt="upload-img"
+                  style={{width: '80px', height: '80px', objectFit: 'cover'}}
+                />
+              </Label>
+              <Input
+                type="file"
+                id="Voucher_Image"
+                name="Voucher_Image"
+                value={modalInputData.Voucher_Image}
+                onChange={handleOnChange}
+                style={{display: 'none'}}
+              />
+            </InputWrapper>
             <InputWrapper>
               <Label>Voucher Type: </Label>
               <Select
