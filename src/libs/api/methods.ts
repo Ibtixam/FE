@@ -15,7 +15,7 @@ export const getRequest = async (url: string) => {
 
 export const postRequest = async (url: string, payload: object) => {
   const API_URL = `${BASE_URL}/api/${url}`;
-  const headers = header();
+  const headers = header(payload);
   try {
     const res = await axios.post(API_URL, payload, {headers});
     return res.data;

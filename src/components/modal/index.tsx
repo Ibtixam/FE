@@ -31,7 +31,7 @@ interface ModalInputProps {
   Voucher_Number: string;
   Amount: string;
   Date: string;
-  Voucher_Image: string;
+  Voucher_Image: File | null;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -45,20 +45,29 @@ const Modal: React.FC<ModalProps> = ({
     Voucher_Number: '',
     Amount: '',
     Date: '',
-    Voucher_Image: '',
+    Voucher_Image: null,
   });
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     if (!e) return;
+
     const target = e.label ? e : e.target;
-    const {value, name} = target;
-    setModalInputData((prev: any) => ({...prev, [name]: value}));
+    const {name} = target;
+
+    if (name === 'Voucher_Image' && target.files) {
+      const file = target.files[0];
+      setModalInputData((prev: any) => ({
+        ...prev,
+        [name]: file,
+      }));
+    } else {
+      const {value} = target;
+      setModalInputData((prev: any) => ({...prev, [name]: value}));
+    }
   };
 
   const handleSave = async () => {
     const res = await SharedApi?.addItem(modalInputData);
-    console.log(res)
-    console.log(modalInputData)
     if (setProducts) {
       setProducts((prev: any) => [...prev, {...modalInputData}]);
     }
@@ -67,7 +76,7 @@ const Modal: React.FC<ModalProps> = ({
       Voucher_Number: '',
       Amount: '',
       Date: '',
-      Voucher_Image: '',
+      Voucher_Image: null,
     });
     swalAlert('Product Added Successfully');
     onCancel?.();
@@ -93,9 +102,7 @@ const Modal: React.FC<ModalProps> = ({
                 type="file"
                 id="Voucher_Image"
                 name="Voucher_Image"
-                value={modalInputData.Voucher_Image}
                 onChange={handleOnChange}
-                style={{display: 'none'}}
               />
             </InputWrapper>
             <InputWrapper>
