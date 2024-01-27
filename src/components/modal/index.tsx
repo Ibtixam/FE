@@ -9,6 +9,7 @@ import {
   ButtonWrapper,
   CancelButton,
   SaveButton,
+  VoucherImage,
 } from './styles';
 import Select, {GroupBase} from 'react-select';
 import ReactDOM from 'react-dom';
@@ -47,6 +48,7 @@ const Modal: React.FC<ModalProps> = ({
     Date: '',
     Voucher_Image: null,
   });
+  const [imagePreview, setImagePreview] = useState<string>(UploadImage);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
     if (!e) return;
@@ -56,6 +58,8 @@ const Modal: React.FC<ModalProps> = ({
 
     if (name === 'Voucher_Image' && target.files) {
       const file = target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setImagePreview(imageUrl);
       setModalInputData((prev: any) => ({
         ...prev,
         [name]: file,
@@ -69,7 +73,13 @@ const Modal: React.FC<ModalProps> = ({
   const handleSave = async () => {
     const res = await SharedApi?.addItem(modalInputData);
     if (setProducts) {
-      setProducts((prev: any) => [...prev, {...modalInputData}]);
+      setProducts((prev: any) => [
+        ...prev,
+        {
+          ...modalInputData,
+          Voucher_Image: {name: modalInputData?.Voucher_Image?.name},
+        },
+      ]);
     }
     setModalInputData({
       Voucher_Type: '',
@@ -92,17 +102,14 @@ const Modal: React.FC<ModalProps> = ({
             <Title>Add Voucher</Title>
             <InputWrapper style={{justifyContent: 'center'}}>
               <Label htmlFor="Voucher_Image" className="voucher-image">
-                <img
-                  src={UploadImage}
-                  alt="upload-img"
-                  style={{width: '80px', height: '80px', objectFit: 'cover'}}
-                />
+                <VoucherImage src={imagePreview} alt="upload-img" />
               </Label>
               <Input
                 type="file"
                 id="Voucher_Image"
                 name="Voucher_Image"
                 onChange={handleOnChange}
+                style={{display: 'none'}}
               />
             </InputWrapper>
             <InputWrapper>

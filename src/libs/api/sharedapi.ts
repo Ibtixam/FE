@@ -1,4 +1,4 @@
-import {getRequest, postRequest} from './methods';
+import {getRequest, postRequest, postRequestAuth} from './methods';
 
 // ***************** ADMIN API REQUEST ********************
 const getItemList = async () => await getRequest('get/products');
@@ -7,7 +7,7 @@ const addItem = async (payload: object) =>
 
 // ***************** REGISTRATION API REQUEST ********************
 const login = async (payload: object) =>
-  await postRequest('auth/login', payload);
+  await postRequestAuth('auth/login', payload);
 
 export const SharedApi = {
   getItemList,

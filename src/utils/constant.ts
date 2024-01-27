@@ -1,6 +1,7 @@
 import {GroupBase} from 'react-select';
 
 export const BASE_URL: string = 'http://localhost:5000';
+export const IMAGE_BASE_URL: string = `${BASE_URL}/uploads`;
 
 interface VoucherTypeProps {
   value: string | GroupBase<string>;

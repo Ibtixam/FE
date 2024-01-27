@@ -70,7 +70,7 @@ export const Input = styled.input`
   border: 1px solid #dadada;
   padding: 8px 10px;
   &:focus {
-    border: 1px solid #176b87;
+    border: 2px solid #3F92FF;
   }
 `;
 
@@ -127,4 +127,10 @@ export const SaveButton = styled.button`
   cursor: pointer;
   color: #fff;
   background: #176b87;
+`;
+
+export const VoucherImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;

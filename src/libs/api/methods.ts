@@ -23,3 +23,14 @@ export const postRequest = async (url: string, payload: object) => {
     console.log(error);
   }
 };
+
+export const postRequestAuth = async (url: string, payload: object) => {
+  const API_URL = `${BASE_URL}/api/${url}`;
+  const headers = header();
+  try {
+    const res = await axios.post(API_URL, payload, {headers});
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

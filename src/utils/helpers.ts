@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import {IMAGE_BASE_URL} from './constant';
 
 export const swalAlert = (text: string, type: any = 'success') => {
   Swal.fire({
@@ -23,4 +24,8 @@ export const currencyFormat = (price: number) => {
     currency: 'UGX',
   });
   return currencyUGX.format(price);
+};
+
+export const getImageURL = (fileName: string) => {
+  return `${IMAGE_BASE_URL}/${fileName}`;
 };

@@ -27,3 +27,10 @@ export const TableData = styled.td`
   padding: 12px 10px;
   font-size: 15px;
 `;
+
+export const VoucherImage = styled.img`
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+`;
