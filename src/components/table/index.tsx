@@ -20,6 +20,7 @@ interface ItemType {
   Amount: number;
   Date: string;
   Voucher_Image: string;
+  Voucher_Image_URL: string;
 }
 
 const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
@@ -47,16 +48,26 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
       </thead>
       <tbody>
         {ItemList?.map((item: ItemType, index: number) => {
-          const {Voucher_Type, Voucher_Number, Voucher_Image, Amount, Date} =
-            item;
+          const {
+            Voucher_Type,
+            Voucher_Number,
+            Voucher_Image,
+            Voucher_Image_URL,
+            Amount,
+            Date,
+          } = item;
           return (
             <TableRow key={index}>
               <TableData>{index + 1}</TableData>
               <TableData style={{padding: '6px 10px'}}>
-                <VoucherImage
-                  src={getImageURL(Voucher_Image)}
-                  alt="voucher-img"
-                />
+                {Voucher_Image_URL ? (
+                  <VoucherImage src={Voucher_Image_URL} alt="voucher-img" />
+                ) : (
+                  <VoucherImage
+                    src={getImageURL(Voucher_Image)}
+                    alt="voucher-img"
+                  />
+                )}
               </TableData>
               <TableData>{Voucher_Type}</TableData>
               <TableData>{Voucher_Number}</TableData>

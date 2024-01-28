@@ -33,6 +33,7 @@ interface ModalInputProps {
   Amount: string;
   Date: string;
   Voucher_Image: File | null;
+  Voucher_Image_URL: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -47,6 +48,7 @@ const Modal: React.FC<ModalProps> = ({
     Amount: '',
     Date: '',
     Voucher_Image: null,
+    Voucher_Image_URL: '',
   });
   const [imagePreview, setImagePreview] = useState<string>(UploadImage);
 
@@ -63,6 +65,7 @@ const Modal: React.FC<ModalProps> = ({
       setModalInputData((prev: any) => ({
         ...prev,
         [name]: file,
+        Voucher_Image_URL: imageUrl,
       }));
     } else {
       const {value} = target;
@@ -87,6 +90,7 @@ const Modal: React.FC<ModalProps> = ({
       Amount: '',
       Date: '',
       Voucher_Image: null,
+      Voucher_Image_URL: '',
     });
     swalAlert('Product Added Successfully');
     onCancel?.();
