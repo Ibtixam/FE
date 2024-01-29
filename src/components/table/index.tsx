@@ -1,10 +1,12 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {
   TableWrapper,
   TableRow,
   TableHead,
   TableData,
   VoucherImage,
+  ImageWrapper,
+  Image,
 } from './styles';
 import {SharedApi} from '../../libs/api/sharedapi';
 import {currencyFormat, getImageURL} from '../../utils/helpers';
@@ -24,6 +26,8 @@ interface ItemType {
 }
 
 const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
+  const [selectedImage, setSelectedImage] = useState<any>();
+
   const getProducts = async () => {
     const res = await SharedApi?.getItemList();
     setProducts(res);
@@ -61,12 +65,24 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
               <TableData>{index + 1}</TableData>
               <TableData style={{padding: '6px 10px'}}>
                 {Voucher_Image_URL ? (
-                  <VoucherImage src={Voucher_Image_URL} alt="voucher-img" />
+                  <VoucherImage
+                    src={Voucher_Image_URL}
+                    alt="voucher-img"
+                    onClick={() => setSelectedImage(index)}
+                  />
                 ) : (
                   <VoucherImage
                     src={getImageURL(Voucher_Image)}
                     alt="voucher-img"
+                    onClick={() => setSelectedImage(index)}
                   />
+                )}
+                {selectedImage === index && (
+                  <ImageWrapper onClick={() => setSelectedImage(null)}>
+                    <Image
+                      src={Voucher_Image_URL || getImageURL(Voucher_Image)}
+                    />
+                  </ImageWrapper>
                 )}
               </TableData>
               <TableData>{Voucher_Type}</TableData>

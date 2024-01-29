@@ -33,4 +33,30 @@ export const VoucherImage = styled.img`
   height: 40px;
   object-fit: cover;
   border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+export const ImageWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+export const Image = styled.img`
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 100; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;

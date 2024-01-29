@@ -10,7 +10,7 @@ const Header = () => {
   };
   return (
     <HeaderContainer>
-      <HeaderTitle>Product Admin</HeaderTitle>
+      <HeaderTitle>Jan Muhammad Enterprises</HeaderTitle>
       <SvgWrapper onClick={logout}>
         <LogoutSvg />
       </SvgWrapper>

@@ -26,10 +26,9 @@ export const ModalContainer = styled.div`
   .select-voucher {
     width: 190px;
     font-size: 13px;
-    padding: 2px;
   }
   .voucher-image {
-    border: 2px solid #a9a9a9;
+    border: 1px solid hsl(0, 0%, 70%);
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -67,10 +66,15 @@ export const Input = styled.input`
   outline: none;
   width: 190px;
   border-radius: 3px;
-  border: 1px solid #dadada;
+  border: 1px solid hsl(0, 0%, 80%);
   padding: 8px 10px;
   &:focus {
-    border: 2px solid #3F92FF;
+    border: 2px solid #3f92ff;
+  }
+  &::-webkit-inner-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 `;
 

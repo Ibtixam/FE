@@ -129,6 +129,7 @@ const Modal: React.FC<ModalProps> = ({
             <InputWrapper>
               <Label>Voucher Number: </Label>
               <Input
+                type="number"
                 name="Voucher_Number"
                 value={modalInputData.Voucher_Number}
                 onChange={handleOnChange}
@@ -137,6 +138,7 @@ const Modal: React.FC<ModalProps> = ({
             <InputWrapper>
               <Label>Amount: </Label>
               <Input
+                type="number"
                 name="Amount"
                 value={modalInputData.Amount}
                 onChange={handleOnChange}
