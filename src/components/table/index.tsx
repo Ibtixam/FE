@@ -26,7 +26,7 @@ interface ItemType {
 }
 
 const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
-  const [selectedImage, setSelectedImage] = useState<any>();
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const getProducts = async () => {
     const res = await SharedApi?.getItemList();
@@ -78,11 +78,12 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
                   />
                 )}
                 {selectedImage === index && (
-                  <ImageWrapper onClick={() => setSelectedImage(null)}>
+                  <>
+                    <ImageWrapper onClick={() => setSelectedImage(null)} />
                     <Image
                       src={Voucher_Image_URL || getImageURL(Voucher_Image)}
                     />
-                  </ImageWrapper>
+                  </>
                 )}
               </TableData>
               <TableData>{Voucher_Type}</TableData>

@@ -8,7 +8,9 @@ const Dashboard = () => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const ItemList = products?.filter((a: any) =>
-    a?.Voucher_Number?.toLowerCase().includes(search.toLowerCase()),
+    (a?.Voucher_Number || a?.Date)
+      .toLowerCase()
+      .includes(search.toLowerCase())
   );
 
   return (
