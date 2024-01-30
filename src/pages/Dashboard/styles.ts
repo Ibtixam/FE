@@ -24,9 +24,9 @@ export const SearchInput = styled.input`
   border: 2px solid transparent;
   outline: none;
   background-color: #fff;
-  padding: 7px 20px;
-  border-radius: 6px;
-  width: 300px;
+  padding: 8px 20px;
+  border-radius: 6px 0 0 6px; 
+  width: 280px;
   &:focus {
     border: 2px solid #86b6f6;
   }
@@ -45,3 +45,19 @@ export const AddProduct = styled.button`
     transform: scale(0.99);
   }
 `;
+
+export const SearchButton = styled.button`
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 9px 12px;
+  border-radius: 0 6px 6px 0; 
+  color: #fff;
+  font-size: 14px;
+  background: #86b6f6;
+  &:active {
+    transform: scale(0.99);
+  }
+`;
+
+export const SearchWrapper = styled.div``;

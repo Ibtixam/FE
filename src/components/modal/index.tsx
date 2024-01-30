@@ -23,6 +23,7 @@ interface ModalProps {
   visible?: boolean;
   setProducts?: React.Dispatch<React.SetStateAction<any | undefined>>;
   props?: any;
+  title?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
 }
@@ -41,6 +42,7 @@ const Modal: React.FC<ModalProps> = ({
   onCancel,
   onConfirm,
   setProducts,
+  title,
 }) => {
   const [modalInputData, setModalInputData] = useState<ModalInputProps>({
     Voucher_Type: '',
@@ -103,7 +105,7 @@ const Modal: React.FC<ModalProps> = ({
         <>
           <Overlay onClick={onCancel} />
           <ModalContainer>
-            <Title>Add Voucher</Title>
+            <Title>{title}</Title>
             <InputWrapper style={{justifyContent: 'center'}}>
               <Label htmlFor="Voucher_Image" className="voucher-image">
                 <VoucherImage src={imagePreview} alt="upload-img" />
