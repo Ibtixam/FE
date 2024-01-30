@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+
+const opacityAnimation = keyframes`
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+`;
 
 export const TableWrapper = styled.table`
   display: table;
@@ -43,20 +52,22 @@ export const VoucherImage = styled.img`
 export const ImageWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
+  animation: ${opacityAnimation} ease-in-out 0.2s;
 `;
 
 export const Image = styled.img`
-  width: 450px;
-  height: 450px;
-  border-radius: 50%;
-  object-fit: cover;
-  z-index: 100; 
-  position: absolute;
+  width: 60%;
+  height: 500px;
+  border-radius: 5px;
+  object-fit: contain;
+  z-index: 100;
+  position: fixed;
   top: 50%;
   left: 50%;
+  animation: ${opacityAnimation} ease-in-out 0.2s;
   transform: translate(-50%, -50%);
 `;
