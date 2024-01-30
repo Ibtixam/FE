@@ -2,18 +2,11 @@ import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
   width: 100%;
-  height: 59px;
   background: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-`;
-
-export const HeaderTitle = styled.h1`
-  font-size: 22px;
-  pointer-events: none;
-  user-select: none;
+  padding: 6px 25px;
 `;
 
 export const SvgWrapper = styled.div`
@@ -27,4 +20,11 @@ export const SvgWrapper = styled.div`
   &:hover {
     background-color: rgba(139, 139, 139, 0.4);
   }
+`;
+
+export const Logo = styled.img`
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
 `;

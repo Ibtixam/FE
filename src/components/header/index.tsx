@@ -1,6 +1,7 @@
-import {HeaderContainer, HeaderTitle, SvgWrapper} from './styles';
+import {HeaderContainer, Logo, SvgWrapper} from './styles';
 import {LogoutSvg} from '../../assets/svgs';
 import {useApp} from '../../contexts';
+import {LogoImage} from '../../assets/svgs';
 
 const Header = () => {
   const {setauthToken} = useApp() || {};
@@ -10,7 +11,7 @@ const Header = () => {
   };
   return (
     <HeaderContainer>
-      <HeaderTitle>Jan Muhammad Enterprises</HeaderTitle>
+      <Logo src={LogoImage} />
       <SvgWrapper onClick={logout}>
         <LogoutSvg />
       </SvgWrapper>
