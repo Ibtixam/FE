@@ -18,6 +18,7 @@ export const VoucherTypeContants: VoucherTypeProps[] = [
   {value: 'Payment', name: 'Voucher_Type', label: 'Payment'},
   {value: 'Receipt', name: 'Voucher_Type', label: 'Receipt'},
   {value: 'Daily sheet', name: 'Voucher_Type', label: 'Daily sheet'},
+  {value: 'No taken', name: 'Voucher_Type', label: 'No taken'},
   {
     value: 'Add gate one sheet',
     name: 'Voucher_Type',
@@ -34,4 +35,17 @@ export const VoucherTypeContants: VoucherTypeProps[] = [
     label: 'Add general documents',
   },
   {value: 'Bank statements', name: 'Voucher_Type', label: 'Bank statements'},
+];
+
+interface LocationProps {
+  value: string | GroupBase<string>;
+  name: string | GroupBase<string>;
+  label: string | GroupBase<string>;
+}
+
+export const LocationConstants: LocationProps[] = [
+  {value: 'Kampala store', name: 'Location', label: 'Kampala store'},
+  {value: 'Aura shop', name: 'Location', label: 'Aura shop'},
+  {value: 'Site warehouse', name: 'Location', label: 'Site warehouse'},
+  {value: 'Kaboko store', name: 'Location', label: 'Kaboko store'},
 ];

@@ -21,6 +21,7 @@ interface ItemType {
   Voucher_Number: string;
   Amount: number;
   Date: string;
+  Location: string;
   Voucher_Image: string;
   Voucher_Image_URL: string;
 }
@@ -46,6 +47,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
           <TableHead>Voucher Image</TableHead>
           <TableHead>Voucher Type</TableHead>
           <TableHead>Voucher No</TableHead>
+          <TableHead>Location</TableHead>
           <TableHead>Amount</TableHead>
           <TableHead>Date</TableHead>
         </TableRow>
@@ -58,6 +60,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
                 Voucher_Number,
                 Voucher_Image,
                 Voucher_Image_URL,
+                Location,
                 Amount,
                 Date,
               } = item;
@@ -89,7 +92,8 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
                   </TableData>
                   <TableData>{Voucher_Type}</TableData>
                   <TableData>{Voucher_Number}</TableData>
-                  <TableData>{currencyFormat(Amount)}</TableData>
+                  <TableData>{Location || '---'}</TableData>
+                  <TableData>{Amount ? currencyFormat(Amount) : '---'}</TableData>
                   <TableData>{Date}</TableData>
                 </TableRow>
               );
