@@ -21,6 +21,7 @@ interface ItemType {
   Voucher_Number: string;
   Amount: number;
   Date: string;
+  Location: string;
   Voucher_Image: string;
   Voucher_Image_URL: string;
 }
@@ -45,54 +46,59 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
           <TableHead>No.</TableHead>
           <TableHead>Voucher Image</TableHead>
           <TableHead>Voucher Type</TableHead>
-          <TableHead>Voucher Number</TableHead>
+          <TableHead>Voucher No</TableHead>
+          <TableHead>Location</TableHead>
           <TableHead>Amount</TableHead>
           <TableHead>Date</TableHead>
         </TableRow>
       </thead>
       <tbody>
-        {ItemList?.map((item: ItemType, index: number) => {
-          const {
-            Voucher_Type,
-            Voucher_Number,
-            Voucher_Image,
-            Voucher_Image_URL,
-            Amount,
-            Date,
-          } = item;
-          return (
-            <TableRow key={index}>
-              <TableData>{index + 1}</TableData>
-              <TableData style={{padding: '6px 10px'}}>
-                {Voucher_Image_URL ? (
-                  <VoucherImage
-                    src={Voucher_Image_URL}
-                    alt="voucher-img"
-                    onClick={() => setSelectedImage(index)}
-                  />
-                ) : (
-                  <VoucherImage
-                    src={getImageURL(Voucher_Image)}
-                    alt="voucher-img"
-                    onClick={() => setSelectedImage(index)}
-                  />
-                )}
-                {selectedImage === index && (
-                  <>
-                    <ImageWrapper onClick={() => setSelectedImage(null)} />
-                    <Image
-                      src={Voucher_Image_URL || getImageURL(Voucher_Image)}
-                    />
-                  </>
-                )}
-              </TableData>
-              <TableData>{Voucher_Type}</TableData>
-              <TableData>{Voucher_Number}</TableData>
-              <TableData>{currencyFormat(Amount)}</TableData>
-              <TableData>{Date}</TableData>
-            </TableRow>
-          );
-        })}
+        {ItemList.length
+          ? ItemList?.map((item: ItemType, index: number) => {
+              const {
+                Voucher_Type,
+                Voucher_Number,
+                Voucher_Image,
+                Voucher_Image_URL,
+                Location,
+                Amount,
+                Date,
+              } = item;
+              return (
+                <TableRow key={index}>
+                  <TableData>{index + 1}</TableData>
+                  <TableData style={{padding: '6px 10px'}}>
+                    {Voucher_Image_URL ? (
+                      <VoucherImage
+                        src={Voucher_Image_URL}
+                        alt="voucher-img"
+                        onClick={() => setSelectedImage(index)}
+                      />
+                    ) : (
+                      <VoucherImage
+                        src={getImageURL(Voucher_Image)}
+                        alt="voucher-img"
+                        onClick={() => setSelectedImage(index)}
+                      />
+                    )}
+                    {selectedImage === index && (
+                      <>
+                        <ImageWrapper onClick={() => setSelectedImage(null)} />
+                        <Image
+                          src={Voucher_Image_URL || getImageURL(Voucher_Image)}
+                        />
+                      </>
+                    )}
+                  </TableData>
+                  <TableData>{Voucher_Type}</TableData>
+                  <TableData>{Voucher_Number}</TableData>
+                  <TableData>{Location || '---'}</TableData>
+                  <TableData>{Amount ? currencyFormat(Amount) : '---'}</TableData>
+                  <TableData>{Date}</TableData>
+                </TableRow>
+              );
+            })
+          : null}
       </tbody>
     </TableWrapper>
   );

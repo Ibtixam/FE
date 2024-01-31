@@ -16,13 +16,14 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import {swalAlert} from '../../utils/helpers';
 import {SharedApi} from '../../libs/api/sharedapi';
-import {VoucherTypeContants} from '../../utils/constant';
+import {LocationConstants, VoucherTypeContants} from '../../utils/constant';
 import {UploadImage} from '../../assets/svgs';
 
 interface ModalProps {
   visible?: boolean;
   setProducts?: React.Dispatch<React.SetStateAction<any | undefined>>;
   props?: any;
+  title?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
 }
@@ -32,6 +33,7 @@ interface ModalInputProps {
   Voucher_Number: string;
   Amount: string;
   Date: string;
+  Location: string;
   Voucher_Image: File | null;
   Voucher_Image_URL: string;
 }
@@ -41,11 +43,13 @@ const Modal: React.FC<ModalProps> = ({
   onCancel,
   onConfirm,
   setProducts,
+  title,
 }) => {
   const [modalInputData, setModalInputData] = useState<ModalInputProps>({
     Voucher_Type: '',
     Voucher_Number: '',
     Amount: '',
+    Location: '',
     Date: '',
     Voucher_Image: null,
     Voucher_Image_URL: '',
@@ -88,11 +92,13 @@ const Modal: React.FC<ModalProps> = ({
       Voucher_Type: '',
       Voucher_Number: '',
       Amount: '',
+      Location: '',
       Date: '',
       Voucher_Image: null,
       Voucher_Image_URL: '',
     });
     swalAlert('Product Added Successfully');
+    setImagePreview(UploadImage);
     onCancel?.();
     return res;
   };
@@ -103,7 +109,7 @@ const Modal: React.FC<ModalProps> = ({
         <>
           <Overlay onClick={onCancel} />
           <ModalContainer>
-            <Title>Add Voucher</Title>
+            <Title>{title}</Title>
             <InputWrapper style={{justifyContent: 'center'}}>
               <Label htmlFor="Voucher_Image" className="voucher-image">
                 <VoucherImage src={imagePreview} alt="upload-img" />
@@ -136,13 +142,30 @@ const Modal: React.FC<ModalProps> = ({
               />
             </InputWrapper>
             <InputWrapper>
-              <Label>Amount: </Label>
-              <Input
-                type="number"
-                name="Amount"
-                value={modalInputData.Amount}
-                onChange={handleOnChange}
-              />
+              {modalInputData.Voucher_Type === 'GTN Number' ? (
+                <>
+                  <Label>Location: </Label>
+                  <Select
+                    defaultValue={modalInputData.Location}
+                    onChange={handleOnChange}
+                    isSearchable={false}
+                    options={
+                      LocationConstants as unknown as GroupBase<string>[]
+                    }
+                    className="select-voucher"
+                  />
+                </>
+              ) : (
+                <>
+                  <Label>Amount: </Label>
+                  <Input
+                    type="number"
+                    name="Amount"
+                    value={modalInputData.Amount}
+                    onChange={handleOnChange}
+                  />
+                </>
+              )}
             </InputWrapper>
             <InputWrapper>
               <Label>Date: </Label>
