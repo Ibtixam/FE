@@ -6,7 +6,7 @@ import {
   TitleContainer,
   FormContainer,
   Title,
-} from './styles.js';
+} from './styles';
 import Input from '../../components/input';
 import {useNavigate} from 'react-router-dom';
 import {swalAlert} from '../../utils/helpers';
