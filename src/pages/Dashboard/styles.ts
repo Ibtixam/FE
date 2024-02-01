@@ -59,5 +59,3 @@ export const SearchButton = styled.button`
     transform: scale(0.99);
   }
 `;
-
-export const SearchWrapper = styled.div``;

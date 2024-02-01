@@ -5,7 +5,6 @@ import {
   InfoWrapper,
   SearchInput,
   AddProduct,
-  SearchWrapper,
   SearchButton,
 } from './styles';
 
@@ -31,7 +30,7 @@ const Dashboard = () => {
       <Header />
       <ProductContainer>
         <InfoWrapper>
-          <SearchWrapper>
+          <div>
             <SearchInput
               placeholder={'Search by Voucher No.'}
               ref={inputRef}
@@ -42,7 +41,7 @@ const Dashboard = () => {
               }}
             />
             <SearchButton onClick={handleSearch}>Search</SearchButton>
-          </SearchWrapper>
+          </div>
           <AddProduct onClick={() => setVisible(true)}>Add Product</AddProduct>
         </InfoWrapper>
         <Table ItemList={ItemList} setProducts={setProducts} />
