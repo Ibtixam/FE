@@ -19,6 +19,7 @@ interface ModalProps {
   onRequestClose?: () => void;
   component?: ComponentType<any> | undefined;
   modalcontentprops?: object;
+  hideActionButton?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -29,6 +30,7 @@ const Modal: React.FC<ModalProps> = ({
   ok,
   modalcontentprops,
   component: Component,
+  hideActionButton,
 }) => {
   return (
     <>
@@ -36,12 +38,14 @@ const Modal: React.FC<ModalProps> = ({
         <>
           <Overlay onClick={onRequestClose} />
           <ModalContainer>
-            <Title>{title}</Title>
+            {title && <Title>{title}</Title>}
             <Component data={modalcontentprops} />
-            <ButtonWrapper>
-              <CancelButton onClick={onRequestClose}>Cancel</CancelButton>
-              <SaveButton onClick={onConfirm}>{ok || 'Ok'}</SaveButton>
-            </ButtonWrapper>
+            {!hideActionButton && (
+              <ButtonWrapper>
+                <CancelButton onClick={onRequestClose}>Cancel</CancelButton>
+                <SaveButton onClick={onConfirm}>{ok || 'Ok'}</SaveButton>
+              </ButtonWrapper>
+            )}
           </ModalContainer>
         </>
       )}
@@ -49,7 +53,7 @@ const Modal: React.FC<ModalProps> = ({
   );
 };
 
-const createModal: React.FC<ModalProps> = (props) => {
+const createModal: React.FC<ModalProps> = (props: any) => {
   const createModal: any = document.getElementById('modal');
   return ReactDOM.createPortal(<Modal {...props} />, createModal);
 };

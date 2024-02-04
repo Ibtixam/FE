@@ -23,6 +23,7 @@ export const ModalContainer = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   color: #444;
+  padding-bottom: 15px;
   animation: ${opacityAnimation} 0.3s ease-out;
   .select-voucher {
     width: 190px;
@@ -57,7 +58,7 @@ export const Title = styled.h2`
 export const ButtonWrapper = styled.div`
   margin-top: 12px;
   border-top: 1px solid #dadada;
-  padding: 10px 20px;
+  padding: 10px 20px 0;
   width: 100%;
   display: flex;
   justify-content: flex-end;

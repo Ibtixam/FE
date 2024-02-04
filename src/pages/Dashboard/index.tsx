@@ -171,6 +171,7 @@ const Dashboard = () => {
         title={'Search with Date'}
         onRequestClose={() => setDateFilterVisible(false)}
         component={DateFilterModalContent}
+        hideActionButton={true}
       />
     </>
   );
