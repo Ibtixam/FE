@@ -1,184 +1,46 @@
-import {useState} from 'react';
+import {ComponentType} from 'react';
 import {
   ModalContainer,
   Title,
-  Input,
-  Label,
-  InputWrapper,
   Overlay,
   ButtonWrapper,
   CancelButton,
   SaveButton,
-  VoucherImage,
 } from './styles';
-import Select, {GroupBase} from 'react-select';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import {swalAlert} from '../../utils/helpers';
-import {SharedApi} from '../../libs/api/sharedapi';
-import {LocationConstants, VoucherTypeContants} from '../../utils/constant';
-import {UploadImage} from '../../assets/svgs';
 
 interface ModalProps {
   visible?: boolean;
-  setProducts?: React.Dispatch<React.SetStateAction<any | undefined>>;
   props?: any;
   title?: string;
+  ok?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
-}
-
-interface ModalInputProps {
-  Voucher_Type: string;
-  Voucher_Number: string;
-  Amount: string;
-  Date: string;
-  Location: string;
-  Voucher_Image: File | null;
-  Voucher_Image_URL: string;
+  component?: ComponentType<any> | undefined;
+  modalcontentprops?: object;
 }
 
 const Modal: React.FC<ModalProps> = ({
   visible,
   onCancel,
   onConfirm,
-  setProducts,
   title,
+  ok,
+  modalcontentprops,
+  component: Component,
 }) => {
-  const [modalInputData, setModalInputData] = useState<ModalInputProps>({
-    Voucher_Type: '',
-    Voucher_Number: '',
-    Amount: '',
-    Location: '',
-    Date: '',
-    Voucher_Image: null,
-    Voucher_Image_URL: '',
-  });
-  const [imagePreview, setImagePreview] = useState<string>(UploadImage);
-
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement> | any) => {
-    if (!e) return;
-
-    const target = e.label ? e : e.target;
-    const {name} = target;
-
-    if (name === 'Voucher_Image' && target.files) {
-      const file = target.files[0];
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreview(imageUrl);
-      setModalInputData((prev: any) => ({
-        ...prev,
-        [name]: file,
-        Voucher_Image_URL: imageUrl,
-      }));
-    } else {
-      const {value} = target;
-      setModalInputData((prev: any) => ({...prev, [name]: value}));
-    }
-  };
-
-  const handleSave = async () => {
-    const res = await SharedApi?.addItem(modalInputData);
-    if (setProducts) {
-      setProducts((prev: any) => [
-        ...prev,
-        {
-          ...modalInputData,
-          Voucher_Image: {name: modalInputData?.Voucher_Image?.name},
-        },
-      ]);
-    }
-    setModalInputData({
-      Voucher_Type: '',
-      Voucher_Number: '',
-      Amount: '',
-      Location: '',
-      Date: '',
-      Voucher_Image: null,
-      Voucher_Image_URL: '',
-    });
-    swalAlert('Product Added Successfully');
-    setImagePreview(UploadImage);
-    onCancel?.();
-    return res;
-  };
-
   return (
     <>
-      {visible && (
+      {visible && Component && (
         <>
           <Overlay onClick={onCancel} />
           <ModalContainer>
             <Title>{title}</Title>
-            <InputWrapper style={{justifyContent: 'center'}}>
-              <Label htmlFor="Voucher_Image" className="voucher-image">
-                <VoucherImage src={imagePreview} alt="upload-img" />
-              </Label>
-              <Input
-                type="file"
-                id="Voucher_Image"
-                name="Voucher_Image"
-                onChange={handleOnChange}
-                style={{display: 'none'}}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Label>Voucher Type: </Label>
-              <Select
-                defaultValue={modalInputData.Voucher_Type}
-                onChange={handleOnChange}
-                isSearchable={false}
-                options={VoucherTypeContants as unknown as GroupBase<string>[]}
-                className="select-voucher"
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <Label>Voucher Number: </Label>
-              <Input
-                type="number"
-                name="Voucher_Number"
-                value={modalInputData.Voucher_Number}
-                onChange={handleOnChange}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              {modalInputData.Voucher_Type === 'GTN Number' ? (
-                <>
-                  <Label>Location: </Label>
-                  <Select
-                    defaultValue={modalInputData.Location}
-                    onChange={handleOnChange}
-                    isSearchable={false}
-                    options={
-                      LocationConstants as unknown as GroupBase<string>[]
-                    }
-                    className="select-voucher"
-                  />
-                </>
-              ) : (
-                <>
-                  <Label>Amount: </Label>
-                  <Input
-                    type="number"
-                    name="Amount"
-                    value={modalInputData.Amount}
-                    onChange={handleOnChange}
-                  />
-                </>
-              )}
-            </InputWrapper>
-            <InputWrapper>
-              <Label>Date: </Label>
-              <Input
-                name="Date"
-                type="Date"
-                value={modalInputData.Date}
-                onChange={handleOnChange}
-              />
-            </InputWrapper>
+            <Component data={modalcontentprops} />
             <ButtonWrapper>
               <CancelButton onClick={onCancel}>Cancel</CancelButton>
-              <SaveButton onClick={onConfirm || handleSave}>Save</SaveButton>
+              <SaveButton onClick={onConfirm}>{ok || 'Ok'}</SaveButton>
             </ButtonWrapper>
           </ModalContainer>
         </>

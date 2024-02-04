@@ -7,8 +7,31 @@ import {
   AddProduct,
   SearchButton,
 } from './styles';
+import {swalAlert} from '../../utils/helpers';
+import {SharedApi} from '../../libs/api/sharedapi';
+import {UploadImage} from '../../assets/svgs';
+import ModalContent from './modal';
+interface ModalInputProps {
+  Voucher_Type: string;
+  Voucher_Number: string;
+  Amount: string;
+  Date: string;
+  Location: string;
+  Voucher_Image: File | null;
+  Voucher_Image_URL: string;
+}
 
 const Dashboard = () => {
+  const [modalInputData, setModalInputData] = useState<ModalInputProps>({
+    Voucher_Type: '',
+    Voucher_Number: '',
+    Amount: '',
+    Location: '',
+    Date: '',
+    Voucher_Image: null,
+    Voucher_Image_URL: '',
+  });
+  const [imagePreview, setImagePreview] = useState<string>(UploadImage);
   const [products, setProducts] = useState<any | undefined>([]);
   const [search, setSearch] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
@@ -23,6 +46,32 @@ const Dashboard = () => {
       const inputValue = inputRef.current.value;
       setSearch(inputValue);
     }
+  };
+
+  const handleSave = async () => {
+    const res = await SharedApi?.addItem(modalInputData);
+    if (setProducts) {
+      setProducts((prev: any) => [
+        ...prev,
+        {
+          ...modalInputData,
+          Voucher_Image: {name: modalInputData?.Voucher_Image?.name},
+        },
+      ]);
+    }
+    setModalInputData({
+      Voucher_Type: '',
+      Voucher_Number: '',
+      Amount: '',
+      Location: '',
+      Date: '',
+      Voucher_Image: null,
+      Voucher_Image_URL: '',
+    });
+    swalAlert('Product Added Successfully');
+    setImagePreview(UploadImage);
+    setVisible(false);
+    return res;
   };
 
   return (
@@ -42,15 +91,28 @@ const Dashboard = () => {
             />
             <SearchButton onClick={handleSearch}>Search</SearchButton>
           </div>
-          <AddProduct onClick={() => setVisible(true)}>Add Product</AddProduct>
+          <div style={{display: 'flex', gap: '10px'}}>
+            <AddProduct>Filter with Date</AddProduct>
+            <AddProduct onClick={() => setVisible(true)}>
+              Add Product
+            </AddProduct>
+          </div>
         </InfoWrapper>
         <Table ItemList={ItemList} setProducts={setProducts} />
       </ProductContainer>
       <Modal
+        ok={'Save'}
         visible={visible}
         title={'Add Voucher'}
-        setProducts={setProducts}
         onCancel={() => setVisible(false)}
+        onConfirm={handleSave}
+        component={ModalContent}
+        modalcontentprops={{
+          modalInputData,
+          setModalInputData,
+          imagePreview,
+          setImagePreview,
+        }}
       />
     </>
   );
