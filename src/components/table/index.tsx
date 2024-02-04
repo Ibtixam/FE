@@ -53,7 +53,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
         </TableRow>
       </thead>
       <tbody>
-        {ItemList.length
+        {ItemList?.length
           ? ItemList?.map((item: ItemType, index: number) => {
               const {
                 Voucher_Type,
@@ -93,12 +93,14 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
                   <TableData>{Voucher_Type}</TableData>
                   <TableData>{Voucher_Number}</TableData>
                   <TableData>{Location || '---'}</TableData>
-                  <TableData>{Amount ? currencyFormat(Amount) : '---'}</TableData>
+                  <TableData>
+                    {Amount ? currencyFormat(Amount) : '---'}
+                  </TableData>
                   <TableData>{Date}</TableData>
                 </TableRow>
               );
             })
-          : null}
+          : <></>}
       </tbody>
     </TableWrapper>
   );

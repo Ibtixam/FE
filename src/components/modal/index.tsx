@@ -16,14 +16,14 @@ interface ModalProps {
   title?: string;
   ok?: string;
   onConfirm?: () => void;
-  onCancel?: () => void;
+  onRequestClose?: () => void;
   component?: ComponentType<any> | undefined;
   modalcontentprops?: object;
 }
 
 const Modal: React.FC<ModalProps> = ({
   visible,
-  onCancel,
+  onRequestClose,
   onConfirm,
   title,
   ok,
@@ -34,12 +34,12 @@ const Modal: React.FC<ModalProps> = ({
     <>
       {visible && Component && (
         <>
-          <Overlay onClick={onCancel} />
+          <Overlay onClick={onRequestClose} />
           <ModalContainer>
             <Title>{title}</Title>
             <Component data={modalcontentprops} />
             <ButtonWrapper>
-              <CancelButton onClick={onCancel}>Cancel</CancelButton>
+              <CancelButton onClick={onRequestClose}>Cancel</CancelButton>
               <SaveButton onClick={onConfirm}>{ok || 'Ok'}</SaveButton>
             </ButtonWrapper>
           </ModalContainer>

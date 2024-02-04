@@ -11,6 +11,7 @@ import {swalAlert} from '../../utils/helpers';
 import {SharedApi} from '../../libs/api/sharedapi';
 import {UploadImage} from '../../assets/svgs';
 import ModalContent from './modal';
+import {InputWrapper, Label, Input} from './modal/styles';
 interface ModalInputProps {
   Voucher_Type: string;
   Voucher_Number: string;
@@ -19,6 +20,11 @@ interface ModalInputProps {
   Location: string;
   Voucher_Image: File | null;
   Voucher_Image_URL: string;
+}
+
+interface searchDateProps {
+  startDate: string;
+  endDate: string;
 }
 
 const Dashboard = () => {
@@ -34,11 +40,20 @@ const Dashboard = () => {
   const [imagePreview, setImagePreview] = useState<string>(UploadImage);
   const [products, setProducts] = useState<any | undefined>([]);
   const [search, setSearch] = useState<string>('');
-  const [visible, setVisible] = useState<boolean>(false);
+  const [voucherVisible, setVoucherVisible] = useState<boolean>(false);
+  const [dateFilterVisible, setDateFilterVisible] = useState<boolean>(false);
+  const [searchDate, setSearchDate] = useState<searchDateProps>({
+    startDate: '',
+    endDate: '',
+  });
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const ItemList = products?.filter((a: any) =>
-    (a?.Voucher_Number).toLowerCase().includes(search.toLowerCase())
+  const ItemList = products?.filter(
+    (a: any) =>
+      (!search ||
+        (a?.Voucher_Number).toLowerCase().includes(search.toLowerCase())) &&
+      (!searchDate.startDate || a.Date >= searchDate.startDate) &&
+      (!searchDate.endDate || a.Date <= searchDate.endDate)
   );
 
   const handleSearch = () => {
@@ -48,7 +63,7 @@ const Dashboard = () => {
     }
   };
 
-  const handleSave = async () => {
+  const handleAddVoucher = async () => {
     const res = await SharedApi?.addItem(modalInputData);
     if (setProducts) {
       setProducts((prev: any) => [
@@ -70,8 +85,40 @@ const Dashboard = () => {
     });
     swalAlert('Product Added Successfully');
     setImagePreview(UploadImage);
-    setVisible(false);
+    setVoucherVisible(false);
     return res;
+  };
+
+  const handleDateSearchChange = (
+    e: React.ChangeEvent<HTMLInputElement> | any
+  ) => {
+    const {value, name} = e.target;
+    setSearchDate((prev: any) => ({...prev, [name]: value}));
+  };
+
+  const DateFilterModalContent = () => {
+    return (
+      <>
+        <InputWrapper>
+          <Label>Start Date: </Label>
+          <Input
+            name="startDate"
+            type="Date"
+            value={searchDate.startDate}
+            onChange={handleDateSearchChange}
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <Label>End Date: </Label>
+          <Input
+            name="endDate"
+            type="Date"
+            value={searchDate.endDate}
+            onChange={handleDateSearchChange}
+          />
+        </InputWrapper>
+      </>
+    );
   };
 
   return (
@@ -92,20 +139,23 @@ const Dashboard = () => {
             <SearchButton onClick={handleSearch}>Search</SearchButton>
           </div>
           <div style={{display: 'flex', gap: '10px'}}>
-            <AddProduct>Filter with Date</AddProduct>
-            <AddProduct onClick={() => setVisible(true)}>
+            <AddProduct onClick={() => setDateFilterVisible(true)}>
+              Search with Date
+            </AddProduct>
+            <AddProduct onClick={() => setVoucherVisible(true)}>
               Add Product
             </AddProduct>
           </div>
         </InfoWrapper>
         <Table ItemList={ItemList} setProducts={setProducts} />
       </ProductContainer>
+      {/* Voucher Add Modal */}
       <Modal
         ok={'Save'}
-        visible={visible}
+        visible={voucherVisible}
         title={'Add Voucher'}
-        onCancel={() => setVisible(false)}
-        onConfirm={handleSave}
+        onRequestClose={() => setVoucherVisible(false)}
+        onConfirm={handleAddVoucher}
         component={ModalContent}
         modalcontentprops={{
           modalInputData,
@@ -113,6 +163,14 @@ const Dashboard = () => {
           imagePreview,
           setImagePreview,
         }}
+      />
+      {/* Date Search Modal */}
+      <Modal
+        ok={'Search'}
+        visible={dateFilterVisible}
+        title={'Search with Date'}
+        onRequestClose={() => setDateFilterVisible(false)}
+        component={DateFilterModalContent}
       />
     </>
   );

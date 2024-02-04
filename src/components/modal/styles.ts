@@ -54,31 +54,6 @@ export const Title = styled.h2`
   color: #445;
 `;
 
-
-export const SvgWrapper = styled.div`
-  padding: 8px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  position: absolute;
-  right: 24px;
-  &:hover {
-    background-color: rgba(139, 139, 139, 0.4);
-  }
-`;
-
-export const DateInputWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`;
-
-
-
 export const ButtonWrapper = styled.div`
   margin-top: 12px;
   border-top: 1px solid #dadada;
@@ -107,5 +82,3 @@ export const SaveButton = styled.button`
   color: #fff;
   background: #176b87;
 `;
-
-

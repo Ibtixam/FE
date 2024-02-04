@@ -25,8 +25,9 @@ export const SearchInput = styled.input`
   outline: none;
   background-color: #fff;
   padding: 8px 20px;
-  border-radius: 6px 0 0 6px; 
+  border-radius: 6px 0 0 6px;
   width: 280px;
+  height: 39px;
   &:focus {
     border: 2px solid #86b6f6;
   }
@@ -51,7 +52,7 @@ export const SearchButton = styled.button`
   border: none;
   cursor: pointer;
   padding: 9px 12px;
-  border-radius: 0 6px 6px 0; 
+  border-radius: 0 6px 6px 0;
   color: #fff;
   font-size: 14px;
   background: #86b6f6;
