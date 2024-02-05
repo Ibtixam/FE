@@ -12,13 +12,18 @@ interface VoucherTypeProps {
 export const VoucherTypeContants: VoucherTypeProps[] = [
   {value: 'Invoices', name: 'Voucher_Type', label: 'Invoices'},
   {value: 'Delivery', name: 'Voucher_Type', label: 'Delivery'},
-  {value: 'GTN Number', name: 'Voucher_Type', label: 'GTN Number'},
+  {value: 'GTN_Number', name: 'Voucher_Type', label: 'GTN Number'},
   {value: 'Purchase', name: 'Voucher_Type', label: 'Purchase'},
   {value: 'Sale', name: 'Voucher_Type', label: 'Sale'},
   {value: 'Payment', name: 'Voucher_Type', label: 'Payment'},
   {value: 'Receipt', name: 'Voucher_Type', label: 'Receipt'},
   {value: 'Daily sheet', name: 'Voucher_Type', label: 'Daily sheet'},
   {value: 'No taken', name: 'Voucher_Type', label: 'No taken'},
+  {
+    value: 'Bank_Deposite_Slip',
+    name: 'Voucher_Type',
+    label: 'Bank Deposite Slip',
+  },
   {
     value: 'Add gate one sheet',
     name: 'Voucher_Type',

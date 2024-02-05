@@ -27,6 +27,24 @@ const ModalContent = ({data}: any) => {
       setModalInputData((prev: any) => ({...prev, [name]: value}));
     }
   };
+  const VoucherTypes = {
+    Invoices: 'Inv/Delivery No.',
+    Delivery: 'Delivery No.',
+    GTN_Number: 'GTN No.',
+    Sale: 'Order Form No.',
+    Receipt: 'Receipt No.',
+    Cash: 'Cash Receipt No.',
+    Bank_Deposite_Slip: 'Bank Deposite Slip No.',
+    Personal_Documents: 'Document Type',
+  };
+
+  type VoucherTypeKey = keyof typeof VoucherTypes;
+
+  const CheckVoucherType = (voucherType: VoucherTypeKey) => {
+    const selectedVoucher = VoucherTypes[voucherType];
+    return selectedVoucher;
+  };
+
   return (
     <>
       <InputWrapper style={{justifyContent: 'center'}}>
@@ -52,7 +70,7 @@ const ModalContent = ({data}: any) => {
         />
       </InputWrapper>
       <InputWrapper>
-        <Label>Voucher Number: </Label>
+        <Label>{CheckVoucherType(modalInputData.Voucher_Type) || "Voucher Number"}</Label>
         <Input
           type="number"
           name="Voucher_Number"
@@ -61,7 +79,7 @@ const ModalContent = ({data}: any) => {
         />
       </InputWrapper>
       <InputWrapper>
-        {modalInputData.Voucher_Type === 'GTN Number' ? (
+        {modalInputData.Voucher_Type === 'GTN_Number' ? (
           <>
             <Label>Location: </Label>
             <Select
