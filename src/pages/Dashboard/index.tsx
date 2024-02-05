@@ -63,30 +63,53 @@ const Dashboard = () => {
     }
   };
 
+  const isVoucherFormFilled = (data: ModalInputProps): boolean => {
+    const isGTNNumber = data.Voucher_Type === 'GTN_Number';
+    const isValidAmount =
+      parseFloat(data.Amount) >= 2 && data.Amount.trim() !== '';
+
+    return (
+      data.Voucher_Type.trim() !== '' &&
+      data.Voucher_Number.trim().length >= 7 &&
+      isValidAmount &&
+      ((isGTNNumber && data.Location.trim() !== '') ||
+        (!isGTNNumber &&
+          data.Location.trim() === '' &&
+          data.Date.trim() !== '' &&
+          data.Voucher_Image !== null))
+    );
+  };
+
   const handleAddVoucher = async () => {
-    const res = await SharedApi?.addItem(modalInputData);
-    if (setProducts) {
-      setProducts((prev: any) => [
-        ...prev,
-        {
-          ...modalInputData,
-          Voucher_Image: {name: modalInputData?.Voucher_Image?.name},
-        },
-      ]);
+    if (isVoucherFormFilled(modalInputData)) {
+      const res = await SharedApi.addItem(modalInputData);
+      if (setProducts) {
+        setProducts((prev: any) => [
+          ...prev,
+          {
+            ...modalInputData,
+            Voucher_Image: {name: modalInputData?.Voucher_Image?.name},
+          },
+        ]);
+      }
+      setModalInputData({
+        Voucher_Type: '',
+        Voucher_Number: '',
+        Amount: '',
+        Location: '',
+        Date: '',
+        Voucher_Image: null,
+        Voucher_Image_URL: '',
+      });
+      swalAlert('Voucher Added Successfully');
+      setImagePreview(UploadImage);
+      setVoucherVisible(false);
+    } else {
+      swalAlert(
+        'Please fill tha all required fields with valid values.',
+        'error'
+      );
     }
-    setModalInputData({
-      Voucher_Type: '',
-      Voucher_Number: '',
-      Amount: '',
-      Location: '',
-      Date: '',
-      Voucher_Image: null,
-      Voucher_Image_URL: '',
-    });
-    swalAlert('Product Added Successfully');
-    setImagePreview(UploadImage);
-    setVoucherVisible(false);
-    return res;
   };
 
   const handleDateSearchChange = (
