@@ -70,9 +70,11 @@ const ModalContent = ({data}: any) => {
         />
       </InputWrapper>
       <InputWrapper>
-        <Label>{CheckVoucherType(modalInputData.Voucher_Type) || "Voucher Number"}</Label>
+        <Label>
+          {CheckVoucherType(modalInputData.Voucher_Type) || 'Voucher Number'}
+        </Label>
         <Input
-          type="number"
+          type="text"
           name="Voucher_Number"
           value={modalInputData.Voucher_Number}
           onChange={handleOnChange}
