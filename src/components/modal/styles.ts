@@ -1,4 +1,4 @@
-import styled, {keyframes} from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 
 const opacityAnimation = keyframes`    
 0% {
@@ -8,7 +8,11 @@ const opacityAnimation = keyframes`
   opacity: 1;
 }`;
 
-export const ModalContainer = styled.div`
+interface ModalContainerProps {
+  $hideButtonPadding?: boolean;
+}
+
+export const ModalContainer = styled.div<ModalContainerProps>`
   min-width: 350px;
   max-width: 500px;
   background-color: #fff;
@@ -23,7 +27,7 @@ export const ModalContainer = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   color: #444;
-  padding-bottom: 15px;
+  padding-top: 15px;
   animation: ${opacityAnimation} 0.3s ease-out;
   .select-voucher {
     width: 190px;
@@ -38,6 +42,11 @@ export const ModalContainer = styled.div`
     cursor: pointer;
     overflow: hidden;
   }
+  ${({$hideButtonPadding}) =>
+    $hideButtonPadding &&
+    css`
+      padding: 15px 0;
+    `}
 `;
 
 export const Overlay = styled.div`
@@ -51,12 +60,11 @@ export const Overlay = styled.div`
 export const Title = styled.h2`
   font-size: 19px;
   font-weight: 500;
-  margin: 10px 0;
   color: #445;
 `;
 
 export const ButtonWrapper = styled.div`
-  margin-top: 12px;
+  margin: 8px 0;
   border-top: 1px solid #dadada;
   padding: 10px 20px 0;
   width: 100%;
@@ -69,7 +77,7 @@ export const ButtonWrapper = styled.div`
 export const CancelButton = styled.button`
   border-radius: 20px;
   border: none;
-  padding: 8px 12px;
+  padding: 7px 12px;
   cursor: pointer;
   background-color: #e6e6e6;
   color: #444;
@@ -78,8 +86,14 @@ export const CancelButton = styled.button`
 export const SaveButton = styled.button`
   border-radius: 20px;
   border: none;
-  padding: 8px 12px;
+  padding: 7px 12px;
   cursor: pointer;
   color: #fff;
   background: #176b87;
+`;
+
+export const Description = styled.p`
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
 `;

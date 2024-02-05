@@ -77,6 +77,7 @@ const Dashboard = () => {
   const handleAddVoucher = async () => {
     if (isVoucherFormFilled(modalInputData)) {
       const res = await SharedApi.addItem(modalInputData);
+      console.log(res);
       if (setProducts) {
         setProducts((prev: any) => [
           ...prev,
@@ -95,7 +96,7 @@ const Dashboard = () => {
         Voucher_Image: null,
         Voucher_Image_URL: '',
       });
-      swalAlert('Voucher Added Successfully');
+      swalAlert(res);
       setImagePreview(UploadImage);
       setVoucherVisible(false);
     } else {

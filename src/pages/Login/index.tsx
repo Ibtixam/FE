@@ -1,4 +1,4 @@
-import {useState, ChangeEvent, FormEvent} from 'react';
+import {useState, ChangeEvent, FormEvent, useEffect} from 'react';
 import {
   Wrapper,
   LoginContainer,
@@ -15,11 +15,18 @@ import {SharedApi} from '../../libs/api/sharedapi';
 
 const Login = () => {
   const navigate = useNavigate();
-  const {setauthToken} = useApp() || {};
+  const {setauthToken, storedToken} = useApp() || {};
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  useEffect(() => {
+    if (storedToken) {
+      navigate('/dashboard');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleFormData = ({target}: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = target;
@@ -39,7 +46,6 @@ const Login = () => {
       setTimeout(() => navigate('/dashboard'), 1000);
     } catch (error) {
       console.error(error);
-      swalAlert('Invalid Email or Password', 'error');
     }
   };
 

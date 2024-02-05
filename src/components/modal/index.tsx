@@ -6,6 +6,7 @@ import {
   ButtonWrapper,
   CancelButton,
   SaveButton,
+  Description,
 } from './styles';
 import ReactDOM from 'react-dom';
 import React from 'react';
@@ -20,6 +21,7 @@ interface ModalProps {
   component?: ComponentType<any> | undefined;
   modalcontentprops?: object;
   hideActionButton?: boolean;
+  description?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -31,15 +33,17 @@ const Modal: React.FC<ModalProps> = ({
   modalcontentprops,
   component: Component,
   hideActionButton,
+  description,
 }) => {
   return (
     <>
-      {visible && Component && (
+      {visible && (
         <>
           <Overlay onClick={onRequestClose} />
-          <ModalContainer>
+          <ModalContainer $hideButtonPadding={hideActionButton}>
             {title && <Title>{title}</Title>}
-            <Component data={modalcontentprops} />
+            {description && <Description>{description}</Description>}
+            {Component && <Component data={modalcontentprops} />}
             {!hideActionButton && (
               <ButtonWrapper>
                 <CancelButton onClick={onRequestClose}>Cancel</CancelButton>

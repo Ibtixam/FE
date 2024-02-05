@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {BASE_URL} from '../../utils/constant';
-import {header} from '../../utils/helpers';
+import {header, swalAlert} from '../../utils/helpers';
 
 export const getRequest = async (url: string) => {
   const API_URL = `${BASE_URL}/api/${url}`;
@@ -30,7 +30,7 @@ export const postRequestAuth = async (url: string, payload: object) => {
   try {
     const res = await axios.post(API_URL, payload, {headers});
     return res.data;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    swalAlert(error.response.data, 'error');
   }
 };
