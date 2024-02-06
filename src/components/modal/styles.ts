@@ -13,7 +13,7 @@ interface ModalContainerProps {
 }
 
 export const ModalContainer = styled.div<ModalContainerProps>`
-  min-width: 350px;
+  min-width: 320px;
   max-width: 500px;
   background-color: #fff;
   display: flex;
@@ -52,7 +52,7 @@ export const ModalContainer = styled.div<ModalContainerProps>`
 export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
 `;

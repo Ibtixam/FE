@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
 export const ProductContainer = styled.div`
-  width: 85%;
-  margin: 60px auto;
+  width: 100%;
+  margin-top: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 0 100px;
+  @media only screen and (max-width: 700px) {
+    padding: 0 20px;
+  }
 `;
 
 export const InfoWrapper = styled.div`
@@ -18,6 +22,9 @@ export const InfoWrapper = styled.div`
   border-radius: 8px 8px 0 0;
   background-color: #176b87;
   color: #fff;
+  @media only screen and (max-width: 700px) {
+    justify-content: flex-start;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -30,6 +37,9 @@ export const SearchInput = styled.input`
   height: 39px;
   &:focus {
     border: 2px solid #86b6f6;
+  }
+  @media only screen and (max-width: 700px) {
+    display: none;
   }
 `;
 
@@ -58,5 +68,8 @@ export const SearchButton = styled.button`
   background: #86b6f6;
   &:active {
     transform: scale(0.99);
+  }
+  @media only screen and (max-width: 700px) {
+    display: none;
   }
 `;

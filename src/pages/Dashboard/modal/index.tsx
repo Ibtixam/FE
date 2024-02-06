@@ -27,7 +27,7 @@ const ModalContent = ({data}: any) => {
       setModalInputData((prev: any) => ({...prev, [name]: value}));
     }
   };
-  
+
   const VoucherTypes = {
     Invoices: 'Inv/Delivery No.',
     Delivery: 'Delivery No.',
@@ -42,7 +42,7 @@ const ModalContent = ({data}: any) => {
   type VoucherTypeKey = keyof typeof VoucherTypes;
 
   const CheckVoucherType = (voucherType: VoucherTypeKey) => {
-    const selectedVoucher = VoucherTypes[voucherType] || 'Voucher Number';
+    const selectedVoucher = VoucherTypes[voucherType] || 'Number';
     return selectedVoucher;
   };
 
@@ -62,7 +62,7 @@ const ModalContent = ({data}: any) => {
         />
       </InputWrapper>
       <InputWrapper>
-        <Label>Voucher Type: </Label>
+        <Label>Type: </Label>
         <Select
           defaultValue={modalInputData.Voucher_Type}
           onChange={handleOnChange}

@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {
+  TableContainer,
   TableWrapper,
   TableRow,
   TableHead,
@@ -40,21 +41,22 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
   }, []);
 
   return (
-    <TableWrapper>
-      <thead style={{borderBottom: '1px solid rgba(224, 224, 224, 1)'}}>
-        <TableRow>
-          <TableHead>No.</TableHead>
-          <TableHead>Voucher Image</TableHead>
-          <TableHead>Voucher Type</TableHead>
-          <TableHead>Voucher No</TableHead>
-          <TableHead>Location</TableHead>
-          <TableHead>Amount</TableHead>
-          <TableHead>Date</TableHead>
-        </TableRow>
-      </thead>
-      <tbody>
-        {ItemList?.length
-          ? ItemList?.map((item: ItemType, index: number) => {
+    <TableContainer>
+      <TableWrapper>
+        <thead style={{borderBottom: '1px solid rgba(224, 224, 224, 1)'}}>
+          <TableRow>
+            <TableHead>No.</TableHead>
+            <TableHead>Image</TableHead>
+            <TableHead>Type</TableHead>
+            <TableHead>Number</TableHead>
+            <TableHead>Location</TableHead>
+            <TableHead>Amount</TableHead>
+            <TableHead>Date</TableHead>
+          </TableRow>
+        </thead>
+        <tbody>
+          {ItemList?.length ? (
+            ItemList?.map((item: ItemType, index: number) => {
               const {
                 Voucher_Type,
                 Voucher_Number,
@@ -100,9 +102,12 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts}) => {
                 </TableRow>
               );
             })
-          : <></>}
-      </tbody>
-    </TableWrapper>
+          ) : (
+            <></>
+          )}
+        </tbody>
+      </TableWrapper>
+    </TableContainer>
   );
 };
 
