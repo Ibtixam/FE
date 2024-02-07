@@ -1,9 +1,11 @@
 import {getRequest, postRequest, postRequestAuth} from './methods';
 
 // ***************** ADMIN API REQUEST ********************
-const getItemList = async () => await getRequest('get/products');
+const getItemList = async () => await getRequest('get/voucher');
 const addItem = async (payload: object) =>
-  await postRequest('add/products', payload);
+  await postRequest('add/voucher', payload);
+const deleteItem = async (payload: object) =>
+  await postRequestAuth('delete/voucher', payload);
 
 // ***************** REGISTRATION API REQUEST ********************
 const login = async (payload: object) =>
@@ -12,5 +14,6 @@ const login = async (payload: object) =>
 export const SharedApi = {
   getItemList,
   addItem,
+  deleteItem,
   login,
 };

@@ -18,7 +18,7 @@ export const postRequest = async (url: string, payload: object) => {
   const headers = header(payload);
   try {
     const res = await axios.post(API_URL, payload, {headers});
-    return res.data;
+    return res?.data;
   } catch (error) {
     console.log(error);
   }

@@ -18,7 +18,7 @@ export const TableWrapper = styled.table`
   display: table;
   background-color: #fff;
   width: 100%;
-  min-width: 750px;
+  min-width: 850px;
   color: rgba(0, 0, 0, 0.87);
   border-collapse: collapse;
   border-radius: 0 0 8px 8px;
@@ -76,4 +76,19 @@ export const Image = styled.img`
   left: 50%;
   animation: ${opacityAnimation} ease-in-out 0.2s;
   transform: translate(-50%, -50%);
+`;
+
+export const DeleteButton = styled.button`
+  outline: none;
+  border: none;
+  padding: 8px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #fff0f2;
+  color: #d11a2a;
+  border: 2px solid #d11a2a;
+  &:active {
+    transform: scale(0.98);
+  }
 `;

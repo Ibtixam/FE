@@ -77,13 +77,13 @@ const Dashboard = () => {
   const handleAddVoucher = async () => {
     if (isVoucherFormFilled(modalInputData)) {
       const res = await SharedApi.addItem(modalInputData);
-      console.log(res);
-      if (setProducts) {
+      if (products) {
         setProducts((prev: any) => [
           ...prev,
           {
             ...modalInputData,
-            Voucher_Image: {name: modalInputData?.Voucher_Image?.name},
+            Voucher_Image: {name: modalInputData?.Voucher_Image?.name || ''},
+            _id: res?.id,
           },
         ]);
       }
@@ -96,14 +96,12 @@ const Dashboard = () => {
         Voucher_Image: null,
         Voucher_Image_URL: '',
       });
-      swalAlert(res);
+
+      swalAlert(res?.data);
       setImagePreview(UploadImage);
       setVoucherVisible(false);
     } else {
-      swalAlert(
-        'Please fill tha all required fields with valid values.',
-        'error'
-      );
+      swalAlert('Please fill all required fields with valid values.', 'error');
     }
   };
 
@@ -165,7 +163,11 @@ const Dashboard = () => {
             </AddProduct>
           </div>
         </InfoWrapper>
-        <Table ItemList={ItemList} setProducts={setProducts} />
+        <Table
+          ItemList={ItemList}
+          setProducts={setProducts}
+          products={products}
+        />
       </ProductContainer>
       {/* Voucher Add Modal */}
       <Modal

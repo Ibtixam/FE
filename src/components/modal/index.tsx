@@ -47,7 +47,9 @@ const Modal: React.FC<ModalProps> = ({
             {!hideActionButton && (
               <ButtonWrapper>
                 <CancelButton onClick={onRequestClose}>Cancel</CancelButton>
-                <SaveButton onClick={onConfirm}>{ok || 'Ok'}</SaveButton>
+                <SaveButton onClick={onConfirm}>
+                  {ok || 'Ok'}
+                </SaveButton>
               </ButtonWrapper>
             )}
           </ModalContainer>

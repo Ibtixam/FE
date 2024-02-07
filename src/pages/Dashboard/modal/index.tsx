@@ -66,7 +66,7 @@ const ModalContent = ({data}: any) => {
         <Select
           defaultValue={modalInputData.Voucher_Type}
           onChange={handleOnChange}
-          isSearchable={false}
+          isSearchable={true}
           options={VoucherTypeContants as unknown as GroupBase<string>[]}
           className="select-voucher"
         />
