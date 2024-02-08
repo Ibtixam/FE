@@ -28,3 +28,14 @@ export const Logo = styled.img`
   object-fit: cover;
   cursor: pointer;
 `;
+
+export const Role = styled.p`
+  font-weight: 500;
+`;
+
+export const RightWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+`;
