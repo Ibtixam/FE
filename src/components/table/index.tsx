@@ -39,7 +39,12 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
   const {role} = useApp() || {};
 
   const getProducts = async () => {
-    const res = await SharedApi?.getItemList();
+    let res;
+    if (role === 'admin') {
+      res = await SharedApi?.getItemList();
+    } else {
+      res = await SharedApi?.getAllItems();
+    }
     if (setProducts && res) {
       setProducts(res);
     }
@@ -51,7 +56,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
   }, []);
 
   const handleDelete = async () => {
-    const res = await SharedApi.deleteItem({id: selectedTableID});
+    await SharedApi.deleteItem({id: selectedTableID});
     setVisible(false);
     if (products && setProducts) {
       setProducts((prev: any[]) =>
