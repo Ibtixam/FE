@@ -29,3 +29,9 @@ export const currencyFormat = (price: number) => {
 export const getImageURL = (fileName: string) => {
   return `${IMAGE_BASE_URL}/${fileName}`;
 };
+
+export const capitalize = (word: string | undefined) => {
+  if (!word) return;
+  const lower = word.toLowerCase();
+  return lower.charAt(0).toUpperCase() + lower.slice(1);
+};
