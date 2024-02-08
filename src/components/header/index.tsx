@@ -4,8 +4,8 @@ import {useApp} from '../../contexts';
 import {LogoImage} from '../../assets/svgs';
 import {Modal} from '../index';
 import {useEffect, useState} from 'react';
-import {SharedApi} from '../../libs/api/sharedapi';
 import {capitalize} from '../../utils/helpers';
+import {RegistrationApi} from '../../libs/api/registration.api';
 
 const Header = () => {
   const {setauthToken, setRole, role} = useApp() || {};
@@ -16,7 +16,7 @@ const Header = () => {
     setauthToken?.('');
   };
   const getUserDetails = async () => {
-    const res = await SharedApi?.getUserDetails();
+    const res = await RegistrationApi?.getUserDetails();
     setRole?.(res?.role);
   };
 

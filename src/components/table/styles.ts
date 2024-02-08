@@ -18,7 +18,7 @@ export const TableWrapper = styled.table`
   display: table;
   background-color: #fff;
   width: 100%;
-  min-width: 850px;
+  min-width: 750px;
   color: rgba(0, 0, 0, 0.87);
   border-collapse: collapse;
   border-radius: 0 0 8px 8px;

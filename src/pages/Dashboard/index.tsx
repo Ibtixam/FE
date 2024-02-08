@@ -50,10 +50,10 @@ const Dashboard = () => {
 
   const ItemList = products?.filter(
     (a: any) =>
-      (!search ||
-        (a?.Voucher_Number).toLowerCase().includes(search.toLowerCase())) &&
-      (!searchDate.startDate || a.Date >= searchDate.startDate) &&
-      (!searchDate.endDate || a.Date <= searchDate.endDate)
+      !search ||
+      (a?.Voucher_Number).toLowerCase().includes(search.toLowerCase())
+    // (!searchDate.startDate || a.Date >= searchDate.startDate) &&
+    // (!searchDate.endDate || a.Date <= searchDate.endDate)
   );
 
   const handleSearch = () => {
@@ -110,6 +110,22 @@ const Dashboard = () => {
   ) => {
     const {value, name} = e.target;
     setSearchDate((prev: any) => ({...prev, [name]: value}));
+  };
+
+  const handleDateSearch = () => {
+    if (searchDate.startDate && searchDate.endDate) {
+      const filteredProducts = products.filter(
+        (a: any) =>
+          a.Date >= searchDate.startDate && a.Date <= searchDate.endDate
+      );
+      setProducts(filteredProducts);
+    } else {
+      swalAlert(
+        'Please provide both start and end dates for the search',
+        'error'
+      );
+    }
+    setDateFilterVisible(false);
   };
 
   const DateFilterModalContent = () => {
@@ -190,8 +206,8 @@ const Dashboard = () => {
         visible={dateFilterVisible}
         title={'Search with Date'}
         onRequestClose={() => setDateFilterVisible(false)}
+        onConfirm={handleDateSearch}
         component={DateFilterModalContent}
-        hideActionButton={true}
       />
     </>
   );

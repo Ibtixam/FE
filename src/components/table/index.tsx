@@ -13,6 +13,7 @@ import {
 import {SharedApi} from '../../libs/api/sharedapi';
 import {currencyFormat, getImageURL} from '../../utils/helpers';
 import {Modal} from '..';
+import {useApp} from '../../contexts';
 
 interface TableProps {
   ItemList?: any;
@@ -35,6 +36,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTableID, setselectedTableID] = useState<string>('');
+  const {role} = useApp() || {};
 
   const getProducts = async () => {
     const res = await SharedApi?.getItemList();
@@ -57,7 +59,6 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
       );
     }
     getProducts();
-    console.log(res, selectedTableID);
   };
 
   return (

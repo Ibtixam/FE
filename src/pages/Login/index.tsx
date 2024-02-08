@@ -11,7 +11,7 @@ import Input from '../../components/input';
 import {useNavigate} from 'react-router-dom';
 import {swalAlert} from '../../utils/helpers';
 import {useApp} from '../../contexts';
-import {SharedApi} from '../../libs/api/sharedapi';
+import {RegistrationApi} from '../../libs/api/registration.api';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await SharedApi?.login(formData);
+      const res = await RegistrationApi?.login(formData);
       localStorage.setItem('token', res.authToken);
       swalAlert('Login Successfully');
       setauthToken?.(res.authToken);

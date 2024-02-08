@@ -7,7 +7,7 @@ export const ProductContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 0 100px;
+  padding: 0 90px;
   @media only screen and (max-width: 700px) {
     padding: 0 20px;
   }
@@ -38,7 +38,7 @@ export const SearchInput = styled.input`
   &:focus {
     border: 2px solid #86b6f6;
   }
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 850px) {
     display: none;
   }
 `;
@@ -69,7 +69,7 @@ export const SearchButton = styled.button`
   &:active {
     transform: scale(0.99);
   }
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 850px) {
     display: none;
   }
 `;

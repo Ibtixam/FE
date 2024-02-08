@@ -42,7 +42,7 @@ const ModalContent = ({data}: any) => {
   type VoucherTypeKey = keyof typeof VoucherTypes;
 
   const CheckVoucherType = (voucherType: VoucherTypeKey) => {
-    const selectedVoucher = VoucherTypes[voucherType] || 'Number';
+    const selectedVoucher = VoucherTypes[voucherType] || 'Voucher Number: ';
     return selectedVoucher;
   };
 
@@ -62,7 +62,7 @@ const ModalContent = ({data}: any) => {
         />
       </InputWrapper>
       <InputWrapper>
-        <Label>Type: </Label>
+        <Label>Voucher Type: </Label>
         <Select
           defaultValue={modalInputData.Voucher_Type}
           onChange={handleOnChange}
