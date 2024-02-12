@@ -52,8 +52,6 @@ const Dashboard = () => {
     (a: any) =>
       !search ||
       (a?.Voucher_Number).toLowerCase().includes(search.toLowerCase())
-    // (!searchDate.startDate || a.Date >= searchDate.startDate) &&
-    // (!searchDate.endDate || a.Date <= searchDate.endDate)
   );
 
   const handleSearch = () => {
@@ -96,7 +94,6 @@ const Dashboard = () => {
         Voucher_Image: null,
         Voucher_Image_URL: '',
       });
-
       swalAlert(res?.data);
       setImagePreview(UploadImage);
       setVoucherVisible(false);

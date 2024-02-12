@@ -56,13 +56,15 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
   }, []);
 
   const handleDelete = async () => {
-    await SharedApi.deleteItem({id: selectedTableID});
-    setVisible(false);
-    if (products && setProducts) {
-      setProducts((prev: any[]) =>
-        prev.filter((voucher: {id: any}) => voucher.id !== selectedTableID)
-      );
+    const res = await SharedApi.deleteItem({id: selectedTableID});
+    if (res.success) {
+      if (products && setProducts) {
+        setProducts((prev: any[]) =>
+          prev.filter((voucher: {id: any}) => voucher.id !== selectedTableID)
+        );
+      }
     }
+    setVisible(false);
     getProducts();
   };
 
