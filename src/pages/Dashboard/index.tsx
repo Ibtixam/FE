@@ -172,7 +172,7 @@ const Dashboard = () => {
               Search with Date
             </AddProduct>
             <AddProduct onClick={() => setVoucherVisible(true)}>
-              Add Product
+              Add Voucher
             </AddProduct>
           </div>
         </InfoWrapper>
