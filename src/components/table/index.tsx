@@ -9,6 +9,7 @@ import {
   ImageWrapper,
   Image,
   DeleteButton,
+  TableHeader,
 } from './styles';
 import {SharedApi} from '../../libs/api/sharedapi';
 import {currencyFormat, getImageURL} from '../../utils/helpers';
@@ -72,7 +73,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
     <>
       <TableContainer>
         <TableWrapper>
-          <thead style={{borderBottom: '1px solid rgba(224, 224, 224, 1)'}}>
+          <TableHeader>
             <TableRow>
               <TableHead>No.</TableHead>
               <TableHead>Image</TableHead>
@@ -83,7 +84,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
               <TableHead>Location</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
-          </thead>
+          </TableHeader>
           <tbody>
             {ItemList?.length ? (
               ItemList?.map((item: ItemType, index: number) => {

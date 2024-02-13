@@ -11,17 +11,26 @@ const opacityAnimation = keyframes`
 
 export const TableContainer = styled.div`
   width: 100%;
+  max-height: 410px;
   overflow-x: auto;
+  border-radius: 0 0 8px 8px;
 `;
 
 export const TableWrapper = styled.table`
   display: table;
   background-color: #fff;
   width: 100%;
-  min-width: 750px;
+  min-width: 880px;
+  height: 100%;
   color: rgba(0, 0, 0, 0.87);
   border-collapse: collapse;
-  border-radius: 0 0 8px 8px;
+`;
+
+export const TableHeader = styled.thead`
+  position: sticky;
+  top: 0px;
+  background: #fff;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
 `;
 
 export const TableRow = styled.tr`

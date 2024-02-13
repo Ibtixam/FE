@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ProductContainer = styled.div`
   width: 100%;
-  margin-top: 60px;
+  margin: 60px 0 30px;
   display: flex;
   justify-content: center;
   align-items: center;
