@@ -42,9 +42,9 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
   const getProducts = async () => {
     let res;
     if (role === 'admin') {
-      res = await SharedApi?.getItemList();
-    } else {
       res = await SharedApi?.getAllItems();
+    } else {
+      res = await SharedApi?.getItemList();
     }
     if (setProducts && res) {
       setProducts(res);
