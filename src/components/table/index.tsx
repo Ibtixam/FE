@@ -41,10 +41,10 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
 
   const getProducts = async () => {
     let res;
-    if (role === 'admin') {
-      res = await SharedApi?.getAllItems();
-    } else {
+    if (role === 'worker') {
       res = await SharedApi?.getItemList();
+    } else if (role === 'admin') {
+      res = await SharedApi?.getAllItems();
     }
     if (setProducts && res) {
       setProducts(res);
@@ -54,9 +54,10 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
   useEffect(() => {
     getProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [role]);
 
   const handleDelete = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const res = await SharedApi.deleteItem({id: selectedTableID});
     if (setProducts) {
       setProducts((prev: any) =>
