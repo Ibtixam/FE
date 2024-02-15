@@ -1,6 +1,6 @@
 import {GroupBase} from 'react-select';
 
-export const BASE_URL: string = 'http://localhost:5000';
+export const BASE_URL: string = 'https://jme-api.up.railway.app';
 export const IMAGE_BASE_URL: string = `${BASE_URL}/uploads`;
 
 interface VoucherTypeProps {
