@@ -105,12 +105,14 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
                           src={Voucher_Image_URL}
                           alt="voucher-img"
                           onClick={() => setSelectedImage(index)}
+                          loading="lazy"
                         />
                       ) : (
                         <VoucherImage
                           src={getImageURL(Voucher_Image)}
                           alt="voucher-img"
                           onClick={() => setSelectedImage(index)}
+                          loading="lazy"
                         />
                       )}
                       {selectedImage === index && (
@@ -122,6 +124,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
                             src={
                               Voucher_Image_URL || getImageURL(Voucher_Image)
                             }
+                            loading="lazy"
                           />
                         </>
                       )}
