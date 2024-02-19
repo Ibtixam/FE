@@ -63,13 +63,14 @@ const Dashboard = () => {
 
   const isVoucherFormFilled = (data: ModalInputProps): boolean => {
     const isGTNNumber = data.Voucher_Type === 'GTN_Number';
-    return data.Voucher_Type.trim() !== '' &&
+    return (
+      data.Voucher_Type.trim() !== '' &&
       data.Voucher_Number.trim().length >= 7 &&
       data.Date.trim() !== '' &&
       data.Voucher_Image !== null &&
-      isGTNNumber
-      ? data.Location.trim() !== ''
-      : data.Amount.trim().length >= 2;
+      ((isGTNNumber && data.Location.trim() !== '') ||
+        (!isGTNNumber && data.Amount.trim().length >= 2))
+    );
   };
 
   const handleAddVoucher = async () => {

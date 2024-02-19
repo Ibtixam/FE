@@ -14,6 +14,9 @@ export const TableContainer = styled.div`
   max-height: 410px;
   overflow-x: auto;
   border-radius: 0 0 8px 8px;
+  @media only screen and (max-width: 400px) {
+    max-height: 500px;
+  }
 `;
 
 export const TableWrapper = styled.table`
