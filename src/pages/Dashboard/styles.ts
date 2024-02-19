@@ -24,6 +24,7 @@ export const InfoWrapper = styled.div`
   color: #fff;
   @media only screen and (max-width: 700px) {
     justify-content: flex-start;
+    padding: 13px 29px;
   }
 `;
 
@@ -47,7 +48,7 @@ export const AddProduct = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
-  padding: 8px 15px;
+  padding: 10px 15px;
   border-radius: 4px;
   color: #fff;
   font-size: 15px;
