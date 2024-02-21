@@ -54,7 +54,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
   useEffect(() => {
     getProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [role, products]);
+  }, [role]);
 
   const handleDelete = async () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
