@@ -32,7 +32,6 @@ const Modal: React.FC<ModalProps> = ({
   ok,
   modalcontentprops,
   component: Component,
-  hideActionButton,
   description,
 }) => {
   return (
@@ -40,18 +39,14 @@ const Modal: React.FC<ModalProps> = ({
       {visible && (
         <>
           <Overlay onClick={onRequestClose} />
-          <ModalContainer $hideButtonPadding={hideActionButton}>
+          <ModalContainer>
             {title && <Title>{title}</Title>}
             {description && <Description>{description}</Description>}
             {Component && <Component data={modalcontentprops} />}
-            {!hideActionButton && (
-              <ButtonWrapper>
-                <CancelButton onClick={onRequestClose}>Cancel</CancelButton>
-                <SaveButton onClick={onConfirm}>
-                  {ok || 'Ok'}
-                </SaveButton>
-              </ButtonWrapper>
-            )}
+            <ButtonWrapper>
+              <CancelButton onClick={onRequestClose}>Cancel</CancelButton>
+              <SaveButton onClick={onConfirm}>{ok || 'Ok'}</SaveButton>
+            </ButtonWrapper>
           </ModalContainer>
         </>
       )}

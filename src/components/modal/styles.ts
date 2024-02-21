@@ -1,4 +1,4 @@
-import styled, {css, keyframes} from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 const opacityAnimation = keyframes`    
 0% {
@@ -8,11 +8,7 @@ const opacityAnimation = keyframes`
   opacity: 1;
 }`;
 
-interface ModalContainerProps {
-  $hideButtonPadding?: boolean;
-}
-
-export const ModalContainer = styled.div<ModalContainerProps>`
+export const ModalContainer = styled.div`
   min-width: 320px;
   max-width: 500px;
   background-color: #fff;
@@ -42,11 +38,6 @@ export const ModalContainer = styled.div<ModalContainerProps>`
     cursor: pointer;
     overflow: hidden;
   }
-  ${({$hideButtonPadding}) =>
-    $hideButtonPadding &&
-    css`
-      padding: 15px 0;
-    `}
 `;
 
 export const Overlay = styled.div`

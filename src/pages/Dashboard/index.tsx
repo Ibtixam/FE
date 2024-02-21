@@ -110,20 +110,13 @@ const Dashboard = () => {
     setSearchDate((prev: any) => ({...prev, [name]: value}));
   };
 
-  const handleDateSearch = () => {
+  const handleDateSearch = async () => {
     if (searchDate.startDate && searchDate.endDate) {
-      const filteredProducts = products.filter(
-        (a: any) =>
-          a.Date >= searchDate.startDate && a.Date <= searchDate.endDate
-      );
-      setProducts(filteredProducts);
+      const res = await SharedApi?.filterVoucher(searchDate);
+      setProducts(res);
     } else {
-      swalAlert(
-        'Please provide both start and end dates for the search',
-        'error'
-      );
+      swalAlert('Please select both start and end Date', 'error');
     }
-    setDateFilterVisible(false);
   };
 
   const DateFilterModalContent = () => {
