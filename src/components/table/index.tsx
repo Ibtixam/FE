@@ -76,7 +76,7 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
               <TableHead>No.</TableHead>
               <TableHead>Image</TableHead>
               <TableHead>Voucher Type</TableHead>
-              <TableHead>Voucher Number</TableHead>
+              <TableHead>Voucher No.</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Location</TableHead>

@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <>
       <HeaderContainer>
-        <Logo src={LogoImage} />
+        <Logo src={LogoImage} loading="lazy" />
         <RightWrapper>
           <Role>Role: {capitalize(role)}</Role>
           <SvgWrapper onClick={() => setvisible(true)}>

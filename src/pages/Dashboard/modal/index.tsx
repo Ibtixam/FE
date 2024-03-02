@@ -42,7 +42,7 @@ const ModalContent = ({data}: any) => {
   type VoucherTypeKey = keyof typeof VoucherTypes;
 
   const CheckVoucherType = (voucherType: VoucherTypeKey) => {
-    const selectedVoucher = VoucherTypes[voucherType] || 'Voucher Number: ';
+    const selectedVoucher = VoucherTypes[voucherType] || 'Voucher No: ';
     return selectedVoucher;
   };
 
