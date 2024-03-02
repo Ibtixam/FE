@@ -18,7 +18,7 @@ export const ModalContainer = styled.div`
   align-items: center;
   border-radius: 6px;
   z-index: 10;
-  position: fixed;
+  position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -41,7 +41,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const Overlay = styled.div`
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   width: 100%;
   height: 100%;
   position: fixed;
@@ -62,11 +62,11 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 `;
 
 export const CancelButton = styled.button`
-  border-radius: 20px;
+  border-radius: 6px;
   border: none;
   padding: 7px 12px;
   cursor: pointer;
@@ -75,7 +75,7 @@ export const CancelButton = styled.button`
 `;
 
 export const SaveButton = styled.button`
-  border-radius: 20px;
+  border-radius: 6px;
   border: none;
   padding: 7px 12px;
   cursor: pointer;
