@@ -78,7 +78,8 @@ export const ImageWrapper = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 60%;
+  max-width: 60%;
+  max-height: 500px;
   border-radius: 5px;
   object-fit: contain;
   z-index: 100;
