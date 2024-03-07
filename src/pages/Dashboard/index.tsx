@@ -7,20 +7,9 @@ import {
   AddProduct,
   SearchButton,
 } from './styles';
-import {swalAlert} from '../../utils/helpers';
-import {SharedApi} from '../../libs/api/sharedapi';
-import {UploadImage} from '../../assets/svgs';
 import ModalContent from './modal';
 import {InputWrapper, Label, Input} from './modal/styles';
-interface ModalInputProps {
-  Voucher_Type: string;
-  Voucher_Number: string;
-  Amount: string;
-  Date: string;
-  Location: string;
-  Voucher_Image: File | null;
-  Voucher_Image_URL: string;
-}
+import {useApp} from '../../contexts';
 
 interface searchDateProps {
   startDate: string;
@@ -28,27 +17,26 @@ interface searchDateProps {
 }
 
 const Dashboard = () => {
-  const [modalInputData, setModalInputData] = useState<ModalInputProps>({
-    Voucher_Type: '',
-    Voucher_Number: '',
-    Amount: '',
-    Location: '',
-    Date: '',
-    Voucher_Image: null,
-    Voucher_Image_URL: '',
-  });
-  const [imagePreview, setImagePreview] = useState<string>(UploadImage);
-  const [products, setProducts] = useState<any | undefined>([]);
   const [search, setSearch] = useState<string>('');
-  const [voucherVisible, setVoucherVisible] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [dateFilterVisible, setDateFilterVisible] = useState<boolean>(false);
   const [searchDate, setSearchDate] = useState<searchDateProps>({
     startDate: '',
     endDate: '',
   });
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const {
+    addVoucher,
+    searchVoucherByDate,
+    voucher,
+    voucherVisible,
+    setVoucherVisible,
+    modalInputData,
+    setModalInputData,
+    imagePreview,
+    setImagePreview,
+  } = useApp();
 
-  const ItemList = products?.filter(
+  const ItemList = voucher?.filter(
     (a: any) =>
       !search ||
       (a?.Voucher_Number).toLowerCase().includes(search.toLowerCase())
@@ -56,67 +44,14 @@ const Dashboard = () => {
 
   const handleSearch = () => {
     if (inputRef.current) {
-      const inputValue = inputRef.current.value;
+      const inputValue = inputRef.current?.value || '';
       setSearch(inputValue);
     }
   };
 
-  const isVoucherFormFilled = (data: ModalInputProps): boolean => {
-    const isGTNNumber = data.Voucher_Type === 'GTN_Number';
-    return (
-      data.Voucher_Type.trim() !== '' &&
-      data.Voucher_Number.trim().length >= 7 &&
-      data.Date.trim() !== '' &&
-      data.Voucher_Image !== null &&
-      ((isGTNNumber && data.Location.trim() !== '') ||
-        (!isGTNNumber && data.Amount.trim().length >= 2))
-    );
-  };
-
-  const handleAddVoucher = async () => {
-    if (isVoucherFormFilled(modalInputData)) {
-      const res = await SharedApi.addItem(modalInputData);
-      if (products) {
-        setProducts((prev: any) => [
-          ...prev,
-          {
-            ...modalInputData,
-            Voucher_Image: {name: modalInputData?.Voucher_Image?.name || ''},
-            _id: res?.id,
-          },
-        ]);
-      }
-      setModalInputData({
-        Voucher_Type: '',
-        Voucher_Number: '',
-        Amount: '',
-        Location: '',
-        Date: '',
-        Voucher_Image: null,
-        Voucher_Image_URL: '',
-      });
-      swalAlert(res?.data);
-      setImagePreview(UploadImage);
-      setVoucherVisible(false);
-    } else {
-      swalAlert('Please fill all required fields with valid values.', 'error');
-    }
-  };
-
-  const handleDateSearchChange = (
-    e: React.ChangeEvent<HTMLInputElement> | any
-  ) => {
+  const handleDateSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {value, name} = e.target;
     setSearchDate((prev: any) => ({...prev, [name]: value}));
-  };
-
-  const handleDateSearch = async () => {
-    if (searchDate.startDate && searchDate.endDate) {
-      const res = await SharedApi?.filterVoucher(searchDate);
-      setProducts(res);
-    } else {
-      swalAlert('Please select both start and end Date', 'error');
-    }
   };
 
   const DateFilterModalContent = () => {
@@ -170,11 +105,7 @@ const Dashboard = () => {
             </AddProduct>
           </div>
         </InfoWrapper>
-        <Table
-          ItemList={ItemList}
-          setProducts={setProducts}
-          products={products}
-        />
+        <Table ItemList={ItemList} />
       </ProductContainer>
       {/* Voucher Add Modal */}
       <Modal
@@ -182,7 +113,7 @@ const Dashboard = () => {
         visible={voucherVisible}
         title={'Add Voucher'}
         onRequestClose={() => setVoucherVisible(false)}
-        onConfirm={handleAddVoucher}
+        onConfirm={addVoucher}
         component={ModalContent}
         modalcontentprops={{
           modalInputData,
@@ -197,7 +128,7 @@ const Dashboard = () => {
         visible={dateFilterVisible}
         title={'Search with Date'}
         onRequestClose={() => setDateFilterVisible(false)}
-        onConfirm={handleDateSearch}
+        onConfirm={() => searchVoucherByDate(searchDate)}
         component={DateFilterModalContent}
       />
     </>

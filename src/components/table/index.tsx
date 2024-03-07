@@ -11,15 +11,12 @@ import {
   DeleteButton,
   TableHeader,
 } from './styles';
-import {SharedApi} from '../../libs/api/sharedapi';
 import {currencyFormat, getImageURL} from '../../utils/helpers';
 import {Modal} from '..';
 import {useApp} from '../../contexts';
 
 interface TableProps {
   ItemList?: any;
-  products?: any;
-  setProducts?: React.Dispatch<React.SetStateAction<any>>;
 }
 
 interface ItemType {
@@ -33,39 +30,16 @@ interface ItemType {
   Voucher_Image_URL: string;
 }
 
-const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
+const Table: React.FC<TableProps> = ({ItemList}) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTableID, setselectedTableID] = useState<string>('');
-  const {role} = useApp() || {};
-
-  const getProducts = async () => {
-    let res;
-    if (role === 'worker') {
-      res = await SharedApi?.getItemList();
-    } else if (role === 'admin') {
-      res = await SharedApi?.getAllItems();
-    }
-    if (setProducts && res) {
-      setProducts(res);
-    }
-  };
+  const {role, getVoucherList, deleteVoucher} = useApp();
 
   useEffect(() => {
-    getProducts();
+    getVoucherList(role);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [role]);
-
-  const handleDelete = async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const res = await SharedApi.deleteItem({id: selectedTableID});
-    if (setProducts) {
-      setProducts((prev: any) =>
-        prev.filter((voucher: any) => voucher._id !== selectedTableID)
-      );
-    }
-    setVisible(false);
-  };
 
   return (
     <>
@@ -159,7 +133,10 @@ const Table: React.FC<TableProps> = ({ItemList, setProducts, products}) => {
         description="Are you sure to delete the voucher?"
         visible={visible}
         onRequestClose={() => setVisible(false)}
-        onConfirm={handleDelete}
+        onConfirm={() => {
+          deleteVoucher(selectedTableID);
+          setVisible(false);
+        }}
       />
     </>
   );
