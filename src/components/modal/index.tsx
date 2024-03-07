@@ -1,4 +1,4 @@
-import {ComponentType} from 'react';
+import {ReactNode} from 'react';
 import {
   ModalContainer,
   Title,
@@ -18,9 +18,7 @@ interface ModalProps {
   ok?: string;
   onConfirm?: () => void;
   onRequestClose?: () => void;
-  component?: ComponentType<any> | undefined;
-  modalcontentprops?: object;
-  hideActionButton?: boolean;
+  content?: ReactNode;
   description?: string;
 }
 
@@ -30,8 +28,7 @@ const Modal: React.FC<ModalProps> = ({
   onConfirm,
   title,
   ok,
-  modalcontentprops,
-  component: Component,
+  content,
   description,
 }) => {
   return (
@@ -42,7 +39,7 @@ const Modal: React.FC<ModalProps> = ({
           <ModalContainer>
             {title && <Title>{title}</Title>}
             {description && <Description>{description}</Description>}
-            {Component && <Component data={modalcontentprops} />}
+            {content && content}
             <ButtonWrapper>
               <CancelButton onClick={onRequestClose}>Cancel</CancelButton>
               <SaveButton onClick={onConfirm}>{ok || 'Ok'}</SaveButton>

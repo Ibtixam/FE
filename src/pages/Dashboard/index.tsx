@@ -114,13 +114,16 @@ const Dashboard = () => {
         title={'Add Voucher'}
         onRequestClose={() => setVoucherVisible(false)}
         onConfirm={addVoucher}
-        component={ModalContent}
-        modalcontentprops={{
-          modalInputData,
-          setModalInputData,
-          imagePreview,
-          setImagePreview,
-        }}
+        content={
+          <ModalContent
+            data={{
+              modalInputData,
+              setModalInputData,
+              imagePreview,
+              setImagePreview,
+            }}
+          />
+        }
       />
       {/* Date Search Modal */}
       <Modal
@@ -129,7 +132,7 @@ const Dashboard = () => {
         title={'Search with Date'}
         onRequestClose={() => setDateFilterVisible(false)}
         onConfirm={() => searchVoucherByDate(searchDate)}
-        component={DateFilterModalContent}
+        content={<DateFilterModalContent />}
       />
     </>
   );
