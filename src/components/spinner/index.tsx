@@ -9,7 +9,7 @@ const Spinner = () => {
     border-top: 3px solid #fff;
     border-right: 3px solid transparent;
     box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+    animation: rotation 0.8s linear infinite;
     position: absolute;
     left: 50%;
     top: 50%;

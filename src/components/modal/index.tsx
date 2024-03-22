@@ -13,7 +13,6 @@ import React from 'react';
 
 interface ModalProps {
   visible?: boolean;
-  props?: any;
   title?: string;
   ok?: string;
   onConfirm?: () => void;

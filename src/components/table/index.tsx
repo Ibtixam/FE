@@ -124,7 +124,9 @@ const Table: React.FC<TableProps> = ({ItemList}) => {
                 );
               })
             ) : (
-              <></>
+              <TableData>
+                <p>No Vouchers Found</p>
+              </TableData>
             )}
           </tbody>
         </TableWrapper>

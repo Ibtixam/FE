@@ -131,7 +131,12 @@ const Dashboard = () => {
         visible={dateFilterVisible}
         title={'Search with Date'}
         onRequestClose={() => setDateFilterVisible(false)}
-        onConfirm={() => searchVoucherByDate(searchDate)}
+        onConfirm={() => {
+          searchVoucherByDate(searchDate);
+          if (searchDate.startDate && searchDate.endDate) {
+            setDateFilterVisible(false);
+          }
+        }}
         content={<DateFilterModalContent />}
       />
     </>
