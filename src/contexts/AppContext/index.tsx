@@ -9,7 +9,6 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
   const storedToken = localStorage.getItem('token');
   const [authToken, setauthToken] = useState(storedToken);
   const [role, setRole] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const contextValue: any = {
     authToken,
@@ -17,8 +16,6 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
     storedToken,
     role,
     setRole,
-    isLoading,
-    setIsLoading,
     ...useDashboard(),
   };
 
@@ -27,6 +24,4 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
   );
 };
 
-export const useApp = () => {
-  return useContext(AppContext);
-};
+export const useApp = () => useContext(AppContext);

@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {swalAlert} from '../../utils/helpers';
-import {SharedApi} from '../../libs/api/sharedapi';
+import {SharedApi} from '../../libs/api/dashboard.api';
 import {UploadImage} from '../../assets/svgs';
 
 interface ModalInputProps {
@@ -26,6 +26,7 @@ const useDashboard = () => {
   const [voucher, setVoucher] = useState<any | undefined>([]);
   const [imagePreview, setImagePreview] = useState<string>(UploadImage);
   const [voucherVisible, setVoucherVisible] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isVoucherFormFilled = (data: ModalInputProps): boolean => {
     const isGTNNumber = data.Voucher_Type === 'GTN_Number';
@@ -42,6 +43,7 @@ const useDashboard = () => {
   const addVoucher = async () => {
     if (isVoucherFormFilled(modalInputData)) {
       const res = await SharedApi.addItem(modalInputData);
+      setVoucherVisible(false);
       if (voucher) {
         setVoucher((prev: any) => [
           ...prev,
@@ -61,9 +63,8 @@ const useDashboard = () => {
         Voucher_Image: null,
         Voucher_Image_URL: '',
       });
-      swalAlert(res.data);
       setImagePreview(UploadImage);
-      setVoucherVisible(false);
+      swalAlert(res.data);
     } else {
       swalAlert('Please fill all required fields with valid values.', 'error');
     }
@@ -74,14 +75,17 @@ const useDashboard = () => {
     endDate: string;
   }) => {
     if (searchDate.startDate && searchDate.endDate) {
+      setIsLoading(true);
       const res = await SharedApi?.filterVoucher(searchDate);
       setVoucher(res);
+      setIsLoading(false);
     } else {
       swalAlert('Please select both start and end Date', 'error');
     }
   };
 
   const getVoucherList = async (role: string) => {
+    setIsLoading(true);
     let res;
     if (role === 'worker') {
       res = await SharedApi?.getItemList();
@@ -91,16 +95,20 @@ const useDashboard = () => {
     if (setVoucher && res) {
       setVoucher(res);
     }
+    setIsLoading(false);
   };
 
   const deleteVoucher = async (selectedTableID: string) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setIsLoading(true);
     const res = await SharedApi.deleteItem({id: selectedTableID});
-    if (setVoucher) {
+    if (res && setVoucher) {
       setVoucher((prev: any) =>
         prev.filter((voucher: any) => voucher._id !== selectedTableID)
       );
+      swalAlert('Voucher Deleted Successfully');
     }
+    setIsLoading(false);
   };
 
   return {
@@ -111,11 +119,13 @@ const useDashboard = () => {
 
     // States
     voucher,
-    setVoucherVisible,
+    modalInputData,
     voucherVisible,
     imagePreview,
+    isLoading,
+    setIsLoading,
 
-    modalInputData,
+    setVoucherVisible,
     setModalInputData,
     setImagePreview,
   };

@@ -8,7 +8,7 @@ import {capitalize} from '../../utils/helpers';
 import {RegistrationApi} from '../../libs/api/registration.api';
 
 const Header = () => {
-  const {setauthToken, setRole, role} = useApp() || {};
+  const {setauthToken, setRole, role, setIsLoading} = useApp();
   const [visible, setvisible] = useState<boolean>(false);
 
   const logout = () => {
@@ -16,8 +16,10 @@ const Header = () => {
     setauthToken?.('');
   };
   const getUserDetails = async () => {
+    setIsLoading(true);
     const res = await RegistrationApi?.getUserDetails();
     setRole?.(res?.role);
+    setIsLoading(false);
   };
 
   useEffect(() => {
