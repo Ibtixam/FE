@@ -12,9 +12,9 @@ const App = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    return () => {
+    setTimeout(() => {
       setIsLoading(false);
-    };
+    }, 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

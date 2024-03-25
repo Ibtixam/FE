@@ -15,7 +15,7 @@ import {RegistrationApi} from '../../libs/api/registration.api';
 
 const Login = () => {
   const navigate = useNavigate();
-  const {setauthToken, storedToken} = useApp() || {};
+  const {setauthToken, storedToken, setIsLoading} = useApp() || {};
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -39,10 +39,12 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const res = await RegistrationApi?.login(formData);
       localStorage.setItem('token', res.authToken);
-      swalAlert('Login Successfully');
       setauthToken?.(res.authToken);
+      setIsLoading(false);
+      swalAlert('Login Successfully');
       setTimeout(() => navigate('/dashboard'), 1000);
     } catch (error) {
       console.error(error);

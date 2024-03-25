@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {swalAlert} from '../../utils/helpers';
 import {SharedApi} from '../../libs/api/dashboard.api';
-import {UploadImage} from '../../assets/svgs';
+import {UploadImage} from '../../assets';
 
 interface ModalInputProps {
   Voucher_Type: string;

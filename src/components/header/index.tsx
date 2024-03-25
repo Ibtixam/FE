@@ -1,9 +1,9 @@
-import {HeaderContainer, Logo, SvgWrapper, Role, RightWrapper} from './styles';
-import {LogoutSvg} from '../../assets/svgs';
-import {useApp} from '../../contexts';
-import {LogoImage} from '../../assets/svgs';
-import {Modal} from '../index';
 import {useEffect, useState} from 'react';
+import {HeaderContainer, Logo, SvgWrapper, Role, RightWrapper} from './styles';
+import {LogoutSvg} from '../../assets';
+import {useApp} from '../../contexts';
+import {LogoImage} from '../../assets';
+import {Modal} from '../index';
 import {capitalize} from '../../utils/helpers';
 import {RegistrationApi} from '../../libs/api/registration.api';
 
