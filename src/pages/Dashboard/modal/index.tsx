@@ -31,7 +31,7 @@ const ModalContent = ({data}: any) => {
   const VoucherTypes = {
     Invoices: 'Inv/Delivery No.',
     Delivery: 'Delivery No.',
-    GTN_Number: 'GTN No.',
+    'GTN Number': 'GTN No.',
     Sale: 'Order Form No.',
     Receipt: 'Receipt No.',
     Cash: 'Cash Receipt No.',
@@ -57,6 +57,7 @@ const ModalContent = ({data}: any) => {
           capture="user"
           id="Voucher_Image"
           name="Voucher_Image"
+          accept="image/*"
           onChange={handleOnChange}
           style={{display: 'none'}}
         />
@@ -81,7 +82,7 @@ const ModalContent = ({data}: any) => {
         />
       </InputWrapper>
       <InputWrapper>
-        {modalInputData.Voucher_Type === 'GTN_Number' ? (
+        {modalInputData.Voucher_Type === 'GTN Number' ? (
           <>
             <Label>Location: </Label>
             <Select

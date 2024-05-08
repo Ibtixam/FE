@@ -12,7 +12,7 @@ interface VoucherTypeProps {
 export const VoucherTypeContants: VoucherTypeProps[] = [
   {value: 'Invoices', name: 'Voucher_Type', label: 'Invoices'},
   {value: 'Delivery', name: 'Voucher_Type', label: 'Delivery'},
-  {value: 'GTN_Number', name: 'Voucher_Type', label: 'GTN Number'},
+  {value: 'GTN Number', name: 'Voucher_Type', label: 'GTN Number'},
   {value: 'Purchase', name: 'Voucher_Type', label: 'Purchase'},
   {value: 'Sale', name: 'Voucher_Type', label: 'Sale'},
   {value: 'Payment', name: 'Voucher_Type', label: 'Payment'},

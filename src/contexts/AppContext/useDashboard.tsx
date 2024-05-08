@@ -29,7 +29,7 @@ const useDashboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isVoucherFormFilled = (data: ModalInputProps): boolean => {
-    const isGTNNumber = data.Voucher_Type === 'GTN_Number';
+    const isGTNNumber = data.Voucher_Type === 'GTN Number';
     return (
       data.Voucher_Type.trim() !== '' &&
       data.Voucher_Number.trim().length >= 7 &&
