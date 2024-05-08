@@ -1,9 +1,9 @@
 import {lazy, Fragment, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import PageNotFound from './components/pageNotFound';
-import ProtectedRoutes from './utils/ProtectedRoutes';
-import {Spinner} from './components';
-import {useApp} from './contexts';
+import ProtectedRoutes from '@utils/ProtectedRoutes';
+import {Spinner} from '@components';
+import {useApp} from '@contexts';
 const Login = lazy(() => import('./pages/Login'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 

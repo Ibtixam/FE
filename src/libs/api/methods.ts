@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {BASE_URL} from '../../utils/constant';
-import {header, swalAlert} from '../../utils/helpers';
+import {BASE_URL} from '@utils/constant';
+import {header, swalAlert} from '@utils/helpers';
 
 export const getRequest = async (url: string) => {
   const API_URL = `${BASE_URL}/api/${url}`;

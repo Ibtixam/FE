@@ -11,9 +11,9 @@ import {
   DeleteButton,
   TableHeader,
 } from './styles';
-import {currencyFormat, getImageURL} from '../../utils/helpers';
+import {currencyFormat, getImageURL} from '@utils/helpers';
 import {Modal} from '..';
-import {useApp} from '../../contexts';
+import {useApp} from '@contexts';
 
 interface TableProps {
   ItemList?: any;

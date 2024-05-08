@@ -1,5 +1,5 @@
 import React from 'react';
-import {LocationConstants, VoucherTypeContants} from '../../../utils/constant';
+import {LocationConstants, VoucherTypeContants} from '@utils/constant';
 import Select, {GroupBase} from 'react-select';
 import {InputWrapper, Input, Label, VoucherImage} from './styles';
 

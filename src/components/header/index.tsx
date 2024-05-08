@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react';
 import {HeaderContainer, Logo, SvgWrapper, Role, RightWrapper} from './styles';
-import {LogoutSvg} from '../../assets';
-import {useApp} from '../../contexts';
-import {LogoImage} from '../../assets';
+import {LogoutSvg} from '@assets';
+import {useApp} from '@contexts';
+import {LogoImage} from '@assets';
 import {Modal} from '../index';
-import {capitalize} from '../../utils/helpers';
-import {RegistrationApi} from '../../libs/api/registration.api';
+import {capitalize} from '@utils/helpers';
+import {RegistrationApi} from '@libs/api/registration.api';
 
 const Header = () => {
   const {setauthToken, setRole, role, setIsLoading} = useApp();

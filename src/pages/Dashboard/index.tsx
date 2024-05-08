@@ -1,5 +1,5 @@
 import {useState, useRef} from 'react';
-import {Header, Table, Modal} from '../../components';
+import {Header, Table, Modal} from '@components';
 import {
   ProductContainer,
   InfoWrapper,
@@ -9,7 +9,7 @@ import {
 } from './styles';
 import ModalContent from './modal';
 import {InputWrapper, Label, Input} from './modal/styles';
-import {useApp} from '../../contexts';
+import {useApp} from '@contexts';
 
 interface searchDateProps {
   startDate: string;

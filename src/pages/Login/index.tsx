@@ -7,11 +7,11 @@ import {
   FormContainer,
   Title,
 } from './styles';
-import Input from '../../components/input';
+import {Input} from '@components';
 import {useNavigate} from 'react-router-dom';
-import {swalAlert} from '../../utils/helpers';
-import {useApp} from '../../contexts';
-import {RegistrationApi} from '../../libs/api/registration.api';
+import {swalAlert} from '@utils/helpers';
+import {useApp} from '@contexts';
+import {RegistrationApi} from '@libs/api/registration.api';
 
 const Login = () => {
   const navigate = useNavigate();

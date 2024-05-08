@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl" : "./src",
+    "paths": {
+      "@components": ["components"],
+      "@libs/*": ["libs/*"],
+      "@contexts": ["contexts"],
+      "@utils/*": ["utils/*"],
+      "@assets": ["assets"],
+    },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -14,7 +22,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react-jsx"
   },
-  "include": ["src"],
+  // "include": ["src"]
 }
