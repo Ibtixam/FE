@@ -43,11 +43,12 @@ const Login = () => {
       const res = await RegistrationApi?.login(formData);
       localStorage.setItem('token', res.authToken);
       setauthToken?.(res.authToken);
-      setIsLoading(false);
       swalAlert('Login Successfully');
       setTimeout(() => navigate('/dashboard'), 1000);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
