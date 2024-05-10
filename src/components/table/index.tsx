@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {
   TableContainer,
   TableWrapper,
@@ -13,10 +13,10 @@ import {
 } from './styles';
 import {currencyFormat, getImageURL} from '@utils/helpers';
 import {Modal} from '..';
-import {useApp} from '@contexts';
 
 interface TableProps {
-  ItemList?: any;
+  ItemList: any;
+  onDeleteClick: (tableId: string) => void;
 }
 
 interface ItemType {
@@ -30,16 +30,10 @@ interface ItemType {
   Voucher_Image_URL: string;
 }
 
-const Table: React.FC<TableProps> = ({ItemList}) => {
+const Table: React.FC<TableProps> = ({ItemList, onDeleteClick}) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [visible, setVisible] = useState<boolean>(false);
   const [selectedTableID, setselectedTableID] = useState<string>('');
-  const {role, getVoucherList, deleteVoucher} = useApp();
-
-  useEffect(() => {
-    getVoucherList(role);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [role]);
 
   return (
     <>
@@ -136,7 +130,7 @@ const Table: React.FC<TableProps> = ({ItemList}) => {
         visible={visible}
         onRequestClose={() => setVisible(false)}
         onConfirm={() => {
-          deleteVoucher(selectedTableID);
+          onDeleteClick(selectedTableID);
           setVisible(false);
         }}
       />

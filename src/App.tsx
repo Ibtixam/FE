@@ -4,7 +4,7 @@ import PageNotFound from './components/pageNotFound';
 import ProtectedRoutes from '@utils/ProtectedRoutes';
 import {Spinner} from '@components';
 import {useApp} from '@contexts';
-const Login = lazy(() => import('./pages/Login'));
+const Login = lazy(() => import('./pages/login'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 
 const App = () => {

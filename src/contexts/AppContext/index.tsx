@@ -1,5 +1,4 @@
 import React, {createContext, useContext, useState} from 'react';
-import useDashboard from './useDashboard';
 
 export const AppContext = createContext<any>({});
 
@@ -9,6 +8,7 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
   const storedToken = localStorage.getItem('token');
   const [authToken, setauthToken] = useState(storedToken);
   const [role, setRole] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const contextValue: any = {
     authToken,
@@ -16,7 +16,8 @@ export const AppProvider: React.FC<{children: React.ReactNode}> = ({
     storedToken,
     role,
     setRole,
-    ...useDashboard(),
+    isLoading,
+    setIsLoading,
   };
 
   return (
