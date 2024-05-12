@@ -118,9 +118,11 @@ const Table: React.FC<TableProps> = ({ItemList, onDeleteClick}) => {
                 );
               })
             ) : (
-              <TableData>
-                <p>No Vouchers Found</p>
-              </TableData>
+              <TableRow>
+                <TableData>
+                  <p>No Vouchers Found</p>
+                </TableData>
+              </TableRow>
             )}
           </tbody>
         </TableWrapper>

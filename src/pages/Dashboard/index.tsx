@@ -54,7 +54,7 @@ const Dashboard = () => {
       </>
     );
   };
-
+  
   return (
     <>
       <Header />
@@ -87,7 +87,7 @@ const Dashboard = () => {
         content={
           <ModalContent
             data={{
-              modalContentStates,
+              ...modalContentStates,
             }}
           />
         }
